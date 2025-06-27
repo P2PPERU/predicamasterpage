@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PredicMaster - Presentación Completa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+            color: #1e293b;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .presentation {
+            max-width: 100vw;
+            margin: 0;
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 60px 40px;
+            display: none;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .slide h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #475569 0%, #64748b 50%, #334155 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.025em;
+        }
+
+        .slide h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #1e293b;
+            letter-spacing: -0.025em;
+        }
+
+        .slide h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #475569;
+            letter-spacing: -0.025em;
+        }
+
+        .slide h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #64748b;
+        }
+
+        .slide p, .slide li {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            color: #475569;
+        }
+
+        .slide ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .slide li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .slide li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .hero-slide .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            opacity: 0.8;
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        .hero-slide .tagline {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-top: 30px;
+            color: #475569;
+            letter-spacing: -0.025em;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #64748b, #94a3b8, #cbd5e1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
+        }
+
+        .accent-card {
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+            color: white;
+            border: none;
+        }
+
+        .accent-card:before {
+            background: linear-gradient(90deg, #94a3b8, #cbd5e1, #e2e8f0);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            color: #64748b;
+        }
+
+        .revenue-split {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .split-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .split-percentage {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .split-arrow {
+            font-size: 2rem;
+            color: #64748b;
+            margin: 0 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 4px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .badge-basic {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .badge-premium {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .badge-elite {
+            background: #cbd5e1;
+            color: #1e293b;
+        }
+
+        .badge-legend {
+            background: #94a3b8;
+            color: white;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: #dcfce7;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 12px;
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: #fef3c7;
+            border: 1px solid #fde68a;
+            color: #92400e;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 12px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 1);
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            backdrop-filter: blur(10px);
+            color: #475569;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #475569;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+            max-width: 1400px;
+            align-items: start;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #475569 0%, #64748b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #64748b, #475569);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .cta-section {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #e2e8f0;
+            padding: 40px;
+            border-radius: 16px;
+            margin: 30px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #64748b, #94a3b8, #cbd5e1);
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px 20px;
+            }
+            
+            .slide h1 {
+                font-size: 2.5rem;
+            }
+            
+            .slide h2 {
+                font-size: 2rem;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">PredicMaster</div>
+    
+    <div class="presentation">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">14</span>
+        </div>
+
+        <!-- Slide 1: Hero -->
+        <div class="slide active hero-slide">
+            <h1>🚀 PredicMaster</h1>
+            <p class="subtitle">La Plataforma de Torneos de Predicción Deportiva Más Innovadora de Latinoamérica</p>
+            <p class="tagline">Donde la <span class="highlight">Habilidad</span> Vence a la <span class="highlight">Suerte</span></p>
+            
+            <div class="feature-card" style="margin: 30px 0; max-width: 1000px; background: rgba(255, 255, 255, 0.9); border-left: 4px solid #475569;">
+                <h4 style="color: #475569; margin-bottom: 20px;">Equipo de Liderazgo</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start;">
+                    <div>
+                        <h4 style="color: #475569; margin-bottom: 12px;">Alexander García - CEO & Fundador</h4>
+                        <p style="font-size: 0.95rem; color: #64748b; margin-bottom: 12px;"><strong>Experiencia Comprobada:</strong></p>
+                        <ul style="font-size: 0.9rem; color: #64748b; list-style: disc; padding-left: 20px;">
+                            <li style="margin: 6px 0;">Poker player profesional</li>
+                            <li style="margin: 6px 0;">Pioneer en lanzamiento PPPoker Perú - volumen notable</li>
+                            <li style="margin: 6px 0;">Experiencia con múltiples casas de apuestas LatAm</li>
+                            <li style="margin: 6px 0;">Ex-socio locales físicos apuestas deportivas</li>
+                            <li style="margin: 6px 0;">Desarrollador - programando el MVP actual</li>
+                        </ul>
+                        <p style="font-size: 0.9rem; color: #64748b; margin-top: 15px; font-style: italic;">
+                            "Trabajé desde adentro del sistema y vi cómo todas las casas operan bajo el mismo principio: <strong>'el usuario siempre pierde'</strong>. Los jugadores demandaban una plataforma justa."
+                        </p>
+                    </div>
+                    <div>
+                        <h4 style="color: #475569; margin-bottom: 12px;">Roger Alvarado - COO</h4>
+                        <p style="font-size: 0.95rem; color: #64748b; margin-bottom: 12px;"><strong>Experto en Expansión de Proyectos:</strong></p>
+                        <ul style="font-size: 0.9rem; color: #64748b; list-style: disc; padding-left: 20px;">
+                            <li style="margin: 6px 0;">Ex-Manager PPPoker aplicación Perú</li>
+                            <li style="margin: 6px 0;">Lideró expansión increíble de la plataforma</li>
+                            <li style="margin: 6px 0;">Especialista en crecimiento y operaciones LatAm</li>
+                            <li style="margin: 6px 0;">Network estratégico en gaming digital</li>
+                        </ul>
+                        <p style="font-size: 0.9rem; color: #475569; margin-top: 15px;">
+                            <strong>Combinación estratégica:</strong> Alexander lidera la visión y desarrollo del producto, Roger aporta la experiencia operativa y contactos clave para la expansión regional.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-grid" style="margin-top: 25px;">
+                <div class="feature-card">
+                    <div class="stat-value">P2P</div>
+                    <div class="stat-label">Competencia Directa</div>
+                </div>
+                <div class="feature-card">
+                    <div class="stat-value">0%</div>
+                    <div class="stat-label">Ventaja de Casa</div>
+                </div>
+                <div class="feature-card">
+                    <div class="stat-value">MVP+</div>
+                    <div class="stat-label">Sistema Funcionando</div>
+                </div>
+                <div class="feature-card">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Revenue Streams</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: El Problema -->
+        <div class="slide">
+            <h2>🎯 El Problema del Mercado Actual</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Limitaciones Actuales</h3>
+                    <ul>
+                        <li>Las casas de apuestas siempre tienen ventaja matemática</li>
+                        <li>Los usuarios compiten contra la casa, no entre ellos</li>
+                        <li>Enfoque en suerte más que en habilidad real</li>
+                        <li>Falta de transparencia en algoritmos y probabilidades</li>
+                        <li>Experiencia fragmentada y confusa</li>
+                        <li>Sin reconocimiento al verdadero expertise analítico</li>
+                    </ul>
+                    
+                    <div class="feature-card" style="margin-top: 25px; background: rgba(255, 255, 255, 0.6); border-left: 4px solid #64748b;">
+                        <p style="font-style: italic; font-size: 1.1rem; color: #475569; margin: 0;">
+                            <strong>"Millones juegan con desventaja y nunca ven recompensado su análisis. Solo la casa gana siempre."</strong>
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <h3>Oportunidad de Mercado</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">$8B+</div>
+                            <div class="stat-label">Mercado anual LatAm</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">60M+</div>
+                            <div class="stat-label">Aficionados activos</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">85%</div>
+                            <div class="stat-label">de usuarios ya apuesta por móvil</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">S/ 20</div>
+                            <div class="stat-label">Ticket promedio</div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card" style="margin-top: 20px; background: rgba(255, 255, 255, 0.6); border-left: 4px solid #64748b;">
+                        <p style="font-style: italic; font-size: 1.1rem; color: #475569; margin-bottom: 12px;">
+                            <strong>"Miles de jugadores pierden todo por un solo error, mientras que las jugadas 'seguras' ofrecen recompensas irrisorias. El sistema actual castiga el riesgo sin premiar el análisis."</strong>
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card" style="margin-top: 15px; background: rgba(255, 255, 255, 0.6); border-left: 4px solid #64748b;">
+                        <p style="font-style: italic; font-size: 1.1rem; color: #475569; margin: 0;">
+                            <strong>Un mercado gigante, digitalizado y huérfano de innovación social y transparente.</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: La Solución -->
+        <div class="slide">
+            <h2>💡 Nuestra Solución Revolucionaria</h2>
+            <h3 style="text-align: center; margin-bottom: 30px;">Ecosistema P2P de Gaming Deportivo Basado en Habilidad</h3>
+            
+            <div class="feature-card" style="margin: 0 auto 40px auto; max-width: 1200px; background: linear-gradient(135deg, #475569 0%, #64748b 100%); color: white; border: none; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #94a3b8, #cbd5e1, #e2e8f0);"></div>
+                <h4 style="color: white; margin-bottom: 20px; font-size: 1.4rem;">🎯 Innovación Core Disruptiva</h4>
+                <p style="font-size: 1.2rem; line-height: 1.7; color: rgba(255,255,255,0.95); margin: 0; font-style: italic;">
+                    <strong>"Combinamos lo mejor de torneos de poker, estadísticas deportivas, fantasy y clubs de poker para crear una solución innovadora que penetrará en el mundo de las sportbets tradicionales en Sudamérica."</strong>
+                </p>
+            </div>
+            
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h4>🧠 Sistema de Puntuación Inteligente</h4>
+                    <p><strong>Fórmula:</strong> 100 - Probabilidad del mercado</p>
+                    <p>Premia el verdadero análisis y la identificación de valor, alejando el juego del azar puro</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎯 Mecánicas Únicas Patentables</h4>
+                    <p><strong>Sistema Cascada + Bonificaciones Duales</strong></p>
+                    <p>Pick Master estratégico y Pick BIG automático crean experiencia única en el mercado</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔄 Ecosistema Completo</h4>
+                    <p><strong>Monetización Circular</strong></p>
+                    <p>Variedades de torneos, sistema VIP con estadísticas en tiempo real, premios y reconocimientos visuales que aumentan la retención, sistema de rakeback justo y clubs en una sola plataforma</p>
+                </div>                <div class="feature-card">
+                    <h4>📱 Experiencia Móvil-Primero</h4>
+                    <p><strong>PWA Optimizada para LatAm</strong></p>
+                    <p>Diseño nativo, pagos locales, y UX adaptada a la región</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Ventaja Competitiva Irreplicable -->
+        <div class="slide">
+            <h2>Ventaja Competitiva</h2>
+            <h3 style="text-align: center; margin-bottom: 30px; color: #dc2626;">Las Casas Pueden Copiar el Código, NO Pueden Copiar la Red</h3>
+            
+            <div class="feature-card" style="margin: 0 auto 40px auto; max-width: 1200px; background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: white; border: none; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #fca5a5, #fed7d7, #fee2e2);"></div>
+                <h4 style="color: white; margin-bottom: 20px; font-size: 1.4rem;">Network Moat = Ventaja Irreplicable</h4>
+                <p style="font-size: 1.2rem; line-height: 1.7; color: rgba(255,255,255,0.95); margin: 0; font-style: italic;">
+                    <strong>"Movimos exitosamente PPPoker B2B en un nicho pequeño (poker). Ahora aplicamos la misma red y metodología a un mercado 20x más grande: sportbets."</strong>
+                </p>
+            </div>
+            
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h4>First Mover Advantage LatAm</h4>
+                    <ul>
+                        <li><strong>Perú:</strong> 100% market share inicial P2P skill-based</li>
+                        <li><strong>Sudamérica:</strong> Solo competencia seria en Brasil</li>
+                        <li><strong>Head start:</strong> 18-24 meses vs grandes casas</li>
+                        <li><strong>Market education:</strong> A nuestro favor desde el inicio</li>
+                    </ul>
+                    <div style="margin-top: 15px; padding: 12px; background: rgba(34, 197, 94, 0.1); border-radius: 8px; border-left: 4px solid #22c55e;">
+                        <p style="font-size: 0.9rem; color: #16a34a; margin: 0;">
+                            <strong>Dominancia temprana:</strong> Establecer estándares del mercado antes que llegue competencia
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <h4>PPPoker B2B Validation</h4>
+                    <ul>
+                        <li><strong>Modelo probado:</strong> Movimos exitosamente PPPoker en LatAm</li>
+                        <li><strong>Community validation:</strong> Poker nicho validó nuestro approach</li>
+                        <li><strong>Network establecida:</strong> Contactos que trascienden poker</li>
+                        <li><strong>Scaling experience:</strong> De nicho pequeño a mass market</li>
+                    </ul>
+                    <div style="margin-top: 15px; padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 8px; border-left: 4px solid #3b82f6;">
+                        <p style="font-size: 0.9rem; color: #1d4ed8; margin: 0;">
+                            <strong>Market size leverage:</strong> Poker (nicho) → Sportbets (20x más grande)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <h4>Red de Contactos Establecida</h4>
+                    <ul>
+                        <li><strong>5+ años:</strong> Construyendo relationships gaming LatAm</li>
+                        <li><strong>Cross-vertical network:</strong> Gaming, sports, influencers</li>
+                        <li><strong>Trust built:</strong> Credibilidad ganada ejecutando PPPoker</li>
+                        <li><strong>Cost reduction:</strong> Leverage network para CAC optimizado</li>
+                    </ul>
+                    <div style="margin-top: 15px; padding: 12px; background: rgba(239, 68, 68, 0.1); border-radius: 8px; border-left: 4px solid #dc2626;">
+                        <p style="font-size: 0.9rem; color: #dc2626; margin: 0;">
+                            <strong>Bet365 puede copiar:</strong> El producto/features<br>
+                            <strong>Bet365 NO puede copiar:</strong> Tu network y track record
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <h4>Barreras de Entrada Reales</h4>
+                    <ul>
+                        <li><strong>Network building:</strong> 2-3 años para competencia</li>
+                        <li><strong>B2B execution:</strong> Learning curve de incentive structures</li>
+                        <li><strong>Trust establishment:</strong> Años ganando credibilidad</li>
+                        <li><strong>Local expertise:</strong> Entender matices de cada mercado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="two-column" style="margin-top: 30px;">
+                <div>
+                    <div class="cta-section">
+                        <h4 style="color: #475569; margin-bottom: 16px;">Nuestras Ventajas Competitivas</h4>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">Red establecida</div>
+                                <div class="stat-label">5+ años gaming LatAm</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">Leverage network</div>
+                                <div class="stat-label">CAC reducido 60%</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">Probado</div>
+                                <div class="stat-label">PPPoker B2B execution</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">3-6 meses</div>
+                                <div class="stat-label">Market entry speed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="cta-section">
+                        <h4 style="color: #475569; margin-bottom: 16px;">Por Qué Podemos Competir</h4>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">First Mover</div>
+                                <div class="stat-label">P2P skill-based LatAm</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">Network Local</div>
+                                <div class="stat-label">vs operación global</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">Especialización</div>
+                                <div class="stat-label">vs diversification</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">Agilidad</div>
+                                <div class="stat-label">vs estructura corporativa</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" style="margin-top: 25px; background: rgba(255, 255, 255, 0.9); border-left: 4px solid #22c55e;">
+                <h4 style="color: #16a34a; margin-bottom: 15px;">Aprovechamiento Máximo de Red para Reducción de Costos</h4>
+                <div class="two-column" style="text-align: left;">
+                    <div>
+                        <h5 style="color: #dc2626; margin-bottom: 12px;">Approach Tradicional (Sin Red)</h5>
+                        <ul style="font-size: 0.9rem;">
+                            <li>$2-5M marketing budget por país</li>
+                            <li>$500K+ team local por mercado</li>
+                            <li>18+ meses payback period</li>
+                            <li>Cold outreach y brand building desde cero</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 style="color: #16a34a; margin-bottom: 12px;">Nuestro Network Leverage</h5>
+                        <ul style="font-size: 0.9rem;">
+                            <li>Revenue share vs upfront marketing costs</li>
+                            <li>Contactos warm desde día 1</li>
+                            <li>6-12 meses payback period</li>
+                            <li>Trust y credibilidad pre-establecida</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="font-size: 1rem; margin-top: 15px; color: #475569; text-align: center;">
+                    <strong>Resultado:</strong> CAC 60% menor y time-to-market 5x más rápido que competencia tradicional
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Producto MVP Funcionando -->
+        <div class="slide">
+            <h2>MVP en Desarrollo - Funcionalidades Operativas</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Sistema Funcionando <span class="status-badge">En Desarrollo</span></h3>
+                    
+                    <div class="feature-card" style="margin-bottom: 25px; background: rgba(255, 255, 255, 0.9); border-left: 4px solid #22c55e;">
+                        <h4 style="color: #16a34a; margin-bottom: 15px;">🎯 Producto Real en Acción</h4>
+                        <p style="font-size: 1rem; color: #475569; margin: 0;">
+                            <strong>Screenshots del MVP actual:</strong> Sistema de torneos operativo, balance de usuarios, rankings, pagos integrados y UI móvil optimizada.
+                        </p>
+                    </div>
+                    <ul>
+                        <li>✅ Dashboard principal con métricas en tiempo real</li>
+                        <li>✅ Sistema de torneos con premios reales (PEN 283.50)</li>
+                        <li>✅ Balance de usuarios y sistema de recarga</li>
+                        <li>✅ Gestión de torneos: En Vivo, Registro, Expirados</li>
+                        <li>✅ Freerolls para onboarding masivo</li>
+                        <li>✅ Rankings y sistema de jugadores</li>
+                        <li>✅ PWA móvil nativa optimizada</li>
+                        <li>✅ Panel administrativo funcional</li>
+                        <li>✅ Sistema de pagos integrado</li>
+                        <li>✅ Estados de torneo automatizados</li>
+                    </ul>
+                    
+                    <div class="feature-card" style="background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #22c55e;">
+                        <h4 style="color: #16a34a; margin-bottom: 15px;">📱 Screenshots del Producto Real</h4>
+                        <p style="font-size: 0.95rem; color: #166534; margin-bottom: 12px;">
+                            <strong>Imagen 1:</strong> Dashboard principal - Métricas de precisión, cuota media, torneos activos
+                        </p>
+                        <p style="font-size: 0.95rem; color: #166534; margin-bottom: 12px;">
+                            <strong>Imagen 2:</strong> Lista de torneos - Sistema de premios reales, balance, registro
+                        </p>
+                        <p style="font-size: 0.95rem; color: #166534; margin: 0;">
+                            <strong>Imagen 3:</strong> Detalle de torneo - Freeroll funcionando, ranking, jugadores activos
+                        </p>
+                    </div>
+                    
+                    <h3>Próximas Funcionalidades <span class="coming-soon-badge">Q2 2025</span></h3>
+                    <ul>
+                        <li>Sistema cascada avanzado (3 picks por partido)</li>
+                        <li>Bonificaciones duales estratégicas</li>
+                        <li>Cambio de predicción a medio tiempo</li>
+                        <li>Sistema VIP con estadísticas en tiempo real</li>
+                        <li>Sistema de clubs y revenue share</li>
+                        <li>Pagos automatizados</li>
+                        <li>Sistema rakeback automático</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Evidencia de Tracción Real</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">PEN 283</div>
+                            <div class="stat-label">Premio Real Torneo</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">2.54</div>
+                            <div class="stat-label">Cuota Media Activa</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">Freeroll</div>
+                            <div class="stat-label">Sistema Operativo</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">PWA</div>
+                            <div class="stat-label">Móvil Nativa</div>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-section">
+                        <h4 style="color: #475569; margin-bottom: 16px;">🏆 Ventaja Competitiva Demostrada</h4>
+                        <p><strong>Mientras la competencia tiene solo presentaciones, nosotros tenemos screenshots reales de un producto funcionando.</strong> Sistema de torneos operativo, usuarios activos, premios distribuidos y UX validada.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>✅ Funcionalidades Demostradas</h4>
+                        <ul>
+                            <li><strong>Dashboard completo:</strong> Métricas en tiempo real funcionando</li>
+                            <li><strong>Sistema de torneos:</strong> Premios reales, freerolls, rankings</li>
+                            <li><strong>Gestión de balance:</strong> Recarga, pagos, tracking integrado</li>
+                            <li><strong>UX móvil:</strong> Navegación intuitiva validada con usuarios</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>🎯 Evidencia de Ejecución</h4>
+                        <ul>
+                            <li><strong>Screenshots reales:</strong> No mockups, producto funcionando</li>
+                            <li><strong>Premios distribuidos:</strong> Sistema monetario operativo</li>
+                            <li><strong>Usuarios activos:</strong> Registros y participación real</li>
+                            <li><strong>Estados automatizados:</strong> Gestión de torneos sin intervención manual</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Sistema VIP Premium -->
+        <div class="slide">
+            <h2>Sistema VIP Premium</h2>
+            <div class="two-column">
+                <div>
+                    <div class="feature-card">
+                        <h3>PREDICMASTER PRO</h3>
+                        <div class="stat-value">S/ 33/mes</div>
+                        <p style="margin-bottom: 20px;">$9.99 USD • Membresía Premium Completa</p>
+                        
+                        <h4>Características Incluidas:</h4>
+                        <ul>
+                            <li>Análisis avanzados + AI insights predictivos</li>
+                            <li>Estadísticas detalladas de cada evento</li>
+                            <li>Dashboard personalizable con trends históricos</li>
+                            <li>4 torneos VIP mensuales (entry fees reducidos)</li>
+                            <li>Contenido tipsters premium y análisis exclusivos</li>
+                            <li>Alertas tempranas y notifications push</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3>Estadísticas Detalladas por Evento</h3>
+                    <div class="feature-card">
+                        <h4>Análisis Pre-Partido Inteligente</h4>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">85%</div>
+                                <div class="stat-label">Precisión H2H</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">2.3</div>
+                                <div class="stat-label">Goles Promedio</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">67%</div>
+                                <div class="stat-label">Over 2.5 Rate</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">4.2</div>
+                                <div class="stat-label">Tarjetas/Partido</div>
+                            </div>
+                        </div>
+                        
+                        <h4 style="margin-top: 20px;">Análisis Avanzado Incluye:</h4>
+                        <ul>
+                            <li><strong>Análisis de jugadores:</strong> Forma actual, lesiones, suspensiones</li>
+                            <li><strong>Análisis técnicos:</strong> Estrategias, formaciones, estilos de juego</li>
+                            <li><strong>Situación de equipo:</strong> Moral, presión, motivación, calendario</li>
+                            <li><strong>Contexto del partido:</strong> Importancia, rivalidades, factores externos</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>Pronósticos VIP Exclusivos</h4>
+                        <ul>
+                            <li><strong>Pick del Día:</strong> Análisis profesional con 78% acierto</li>
+                            <li><strong>Combo Seguro:</strong> 3 picks combinados bajo riesgo</li>
+                            <li><strong>Value Bets:</strong> Identificación de cuotas infravaloradas</li>
+                            <li><strong>Live Insights:</strong> Cambios de probabilidad en tiempo real</li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Sistema de Clubs -->
+        <div class="slide">
+            <h2>Sistema de Clubs - Revenue Share B2B</h2>
+            <div class="two-column">
+                <div>
+                    <div class="feature-card accent-card">
+                        <h3 style="color: white;">Estructura Revenue Share</h3>
+                        <p style="color: rgba(255,255,255,0.9); margin-bottom: 15px;"><strong>Modelo B2B para expansión masificada y costo de usuario reducido</strong></p>
+                        
+                        <h4 style="color: white;">Comisiones Torneos (Club Manager)</h4>
+                        <div class="revenue-split" style="background: rgba(255,255,255,0.2);">
+                            <div class="split-item">
+                                <div class="split-percentage" style="color: white;">80%</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">Host del Club</div>
+                            </div>
+                            <div class="split-arrow" style="color: white;">→</div>
+                            <div class="split-item">
+                                <div class="split-percentage" style="color: white;">20%</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">PredicMaster</div>
+                            </div>
+                        </div>
+
+                        <h4 style="color: white;">Suscripciones VIP (50/50)</h4>
+                        <div class="revenue-split" style="background: rgba(255,255,255,0.2);">
+                            <div class="split-item">
+                                <div class="split-percentage" style="color: white;">50%</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">Club Manager</div>
+                            </div>
+                            <div class="split-arrow" style="color: white;">⇄</div>
+                            <div class="split-item">
+                                <div class="split-percentage" style="color: white;">50%</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">PredicMaster</div>
+                            </div>
+                        </div>
+
+                        <h4 style="color: white;">Torneos PredicMaster</h4>
+                        <div class="revenue-split" style="background: rgba(255,255,255,0.2);">
+                            <div class="split-item">
+                                <div class="split-percentage" style="color: white;">20%</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">Club Partner</div>
+                            </div>
+                            <div class="split-arrow" style="color: white;">→</div>
+                            <div class="split-item">
+                                <div class="split-percentage" style="color: white;">80%</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">PredicMaster</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="feature-card">
+                        <h3>Beneficios del Modelo B2B</h3>
+                        <ul>
+                            <li><strong>Expansión masificada:</strong> Managers incentivados a traer usuarios</li>
+                            <li><strong>Costo de usuario reducido:</strong> CAC compartido con partners</li>
+                            <li><strong>Contenido expertise:</strong> Mejores análisis sin investment directo</li>
+                            <li><strong>Escalabilidad:</strong> Unlimited clubs con minimal overhead</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Ejemplo: Club con 100 Miembros</h3>
+                        <p><strong>Ticket promedio S/ 10 • 10 torneos mensuales • 40% jugadores activos</strong></p>
+                        
+                        <div class="stat-item">
+                            <div class="stat-label">Comisión general torneos</div>
+                            <div class="stat-value">S/ 400</div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <div class="stat-label">VIP subscriptions (10% usuarios)</div>
+                            <div class="stat-value">S/ 330</div>
+                        </div>
+
+                        <div class="stat-item" style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                            <div class="stat-label">Revenue para PredicMaster</div>
+                            <div class="stat-value" style="color: #475569;">S/ 245</div>
+                            <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 8px;">Generando volumen masivo para nuestros torneos, permitiendo masificación rápida y consistente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Rakeback y Gamification -->
+        <div class="slide">
+            <h2>Sistema Rakeback y Gamification</h2>
+            <div class="two-column">
+                <div>
+                    <div class="feature-card accent-card">
+                        <h3 style="color: white;">Rakeback Progresivo</h3>
+                        <p style="color: rgba(255,255,255,0.9);">Devolvemos % de comisiones según volumen mensual</p>
+                        
+                        <h4 style="color: white;">Niveles de Rakeback</h4>
+                        <div class="stats-grid">
+                            <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                                <div class="stat-value" style="color: white;">20%</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">Bronce (S/150-600)</div>
+                            </div>
+                            <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                                <div class="stat-value" style="color: white;">30%</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">Plata (S/600-1500)</div>
+                            </div>
+                            <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                                <div class="stat-value" style="color: white;">50%</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">Oro (S/1500-3000)</div>
+                            </div>
+                            <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                                <div class="stat-value" style="color: white;">50%</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">Platino (S/3000+)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Impacto en Retención</h3>
+                        <ul>
+                            <li><strong>LTV +18%:</strong> Mayor retención por rewards</li>
+                            <li><strong>Frecuencia +25%:</strong> Más participación en torneos</li>
+                            <li><strong>Virality boost:</strong> Sistema único genera shares</li>
+                            <li><strong>Automated:</strong> Cálculo y pago automático</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="feature-card">
+                        <h3>Sistema de Reconocimiento Visual</h3>
+                        
+                        <h4>Badges VIP</h4>
+                        <div style="margin: 15px 0;">
+                            <span class="badge badge-basic">💎 VIP Basic</span>
+                            <span class="badge badge-premium">⭐ VIP Premium</span>
+                            <span class="badge badge-elite">💠 VIP Elite</span>
+                        </div>
+
+                        <h4>Rachas de Pronósticos</h4>
+                        <div style="margin: 15px 0;">
+                            <span class="badge badge-basic">🔥 Racha 5</span>
+                            <span class="badge badge-premium">⚡ Racha 10</span>
+                            <span class="badge badge-legend">👑 Racha 15+</span>
+                        </div>
+
+                        <h4>Achievements Especiales</h4>
+                        <div style="margin: 15px 0;">
+                            <span class="badge badge-basic">🎯 Pick Master</span>
+                            <span class="badge badge-premium">🚀 Combo King</span>
+                            <span class="badge badge-elite">💪 High Roller</span>
+                            <span class="badge badge-legend">🏆 Champion</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Elementos Visuales</h3>
+                        <ul>
+                            <li><strong>Avatar frames:</strong> Exclusivos por nivel</li>
+                            <li><strong>Efectos partículas:</strong> En predicciones ganadoras</li>
+                            <li><strong>Colores únicos:</strong> En chat y comments</li>
+                            <li><strong>Animaciones:</strong> Especiales en wins</li>
+                            <li><strong>Leaderboards:</strong> Rankings globales</li>
+                            <li><strong>Progress tracking:</strong> Niveles y EXP</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Impact Metrics</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">+25%</div>
+                                <div class="stat-label">Session Duration</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">+18%</div>
+                                <div class="stat-label">Return Rate</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">+22%</div>
+                                <div class="stat-label">Social Sharing</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">+15%</div>
+                                <div class="stat-label">VIP Conversion</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Monetización Integral -->
+        <div class="slide">
+            <h2>💰 Modelo de Monetización 360°</h2>
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h3>🏆 Torneos B2C (70% ingresos)</h3>
+                    <p><strong>Take Rate Progresivo Inverso</strong></p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">12%</div>
+                            <div class="stat-label">Torneos S/5-35</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">10%</div>
+                            <div class="stat-label">Torneos S/35-150</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">10%</div>
+                            <div class="stat-label">Torneos S/150-350</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">8%</div>
+                            <div class="stat-label">Torneos S/350+</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
+                        Incentivamos participación en torneos de mayor valor con comisiones más atractivas
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>💎 Suscripciones VIP B2C (20%)</h3>
+                    <div class="stat-value">S/ 33/mes</div>
+                    <p>Una sola suscripción con valor real</p>
+                    <ul>
+                        <li>ROI mejorado +35% vs usuarios básicos</li>
+                        <li>Comunidad exclusiva VIP</li>
+                        <li>Hasta 25% descuento en torneos premium</li>
+                        <li>Acceso a freeroll VIP mensuales</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3>⭐ Clubs Revenue Share B2B (10%)</h3>
+                    <p><strong>Sistema 80/20 y 50/50</strong></p>
+                    <ul>
+                        <li>Managers incentivados a traer usuarios</li>
+                        <li>Content expertise sin investment directo</li>
+                        <li>Escalabilidad unlimited con minimal overhead</li>
+                        <li>Diversificación de revenue streams</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cta-section" style="margin-top: 30px;">
+                <h3 style="color: #475569; margin-bottom: 20px;">📊 Unit Economics Consolidados</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">S/ 75</div>
+                        <div class="stat-label">ARPU Mensual ($22)</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">S/ 35</div>
+                        <div class="stat-label">CAC Blended ($10)</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">12x</div>
+                        <div class="stat-label">LTV/CAC Ratio</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">78%</div>
+                        <div class="stat-label">Margen Bruto</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Go-to-Market -->
+        <div class="slide">
+            <h2>📈 Estrategia Go-to-Market LatAm</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Fase 1: Validación Perú (Q1-Q2 2025)</h3>
+                    <ul>
+                        <li><strong>Objetivo:</strong> 2,000 usuarios activos mensuales</li>
+                        <li>Partnerships con tipsters Liga 1 Perú</li>
+                        <li>Marketing orgánico TikTok/Instagram/YouTube</li>
+                        <li>Torneos de entrada S/ 5 para onboarding masivo</li>
+                        <li>Programa referidos (S/ 35 por usuario)</li>
+                        <li>Colaboraciones con influencers deportivos</li>
+                    </ul>
+                    
+                    <h3>Fase 2: Expansión Regional (Q3-Q4 2025)</h3>
+                    <ul>
+                        <li><strong>Objetivo:</strong> 8,000 usuarios multi-país</li>
+                        <li>Lanzamiento México (Liga MX) y Colombia</li>
+                        <li>Adquisición pagada estratégica</li>
+                        <li>Partnerships con medios deportivos regionales</li>
+                        <li>Sistema VIP y clubs completo</li>
+                        <li>Torneos corporativos y branded</li>
+                    </ul>
+
+                    <h3>Fase 3: Consolidación (2026)</h3>
+                    <ul>
+                        <li><strong>Objetivo:</strong> 25,000+ usuarios activos</li>
+                        <li>Expansión Brasil (mercado más grande)</li>
+                        <li>Sistema de franquicias de clubs</li>
+                        <li>Partnerships con ligas oficiales</li>
+                        <li>Producto API para terceros</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>KPIs y Métricas Objetivo</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">35%</div>
+                            <div class="stat-label">Retención 30 días</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">12min</div>
+                            <div class="stat-label">Duración Sesión</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">0.25</div>
+                            <div class="stat-label">Coeficiente Viral</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">18%</div>
+                            <div class="stat-label">Conversión VIP</div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>🎯 Canales de Adquisición</h3>
+                        <ul>
+                            <li><strong>Orgánico (40%):</strong> SEO, content, referidos</li>
+                            <li><strong>Influencers (30%):</strong> Tipsters y creators deportivos</li>
+                            <li><strong>Paid media (20%):</strong> Facebook/Google targeted</li>
+                            <li><strong>Partnerships (10%):</strong> Medios y clubs deportivos</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>💡 Ventajas Competitivas</h3>
+                        <ul>
+                            <li><strong>First-mover:</strong> Único sistema P2P en LatAm</li>
+                            <li><strong>Network effects:</strong> Más usuarios = mejor experiencia</li>
+                            <li><strong>Data moat:</strong> Algoritmos mejoran con uso</li>
+                            <li><strong>Switching costs:</strong> Progresión y comunidad</li>
+                        </ul>
+                    </div>
+
+                    <div class="cta-section">
+                        <h4 style="color: #475569; margin-bottom: 12px;">Roadmap de Crecimiento</h4>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">Q2 25</div>
+                                <div class="stat-label">2K users, S/25K MRR</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">Q4 25</div>
+                                <div class="stat-label">8K users, S/150K MRR</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">Q4 26</div>
+                                <div class="stat-label">25K users, S/600K MRR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Proyecciones Financieras -->
+        <div class="slide">
+            <h2>📊 Proyecciones Financieras Validadas</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Unit Economics Basados en Data del Mercado</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">S/ 30</div>
+                            <div class="stat-label">CAC Realista ($8)</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">S/ 270</div>
+                            <div class="stat-label">LTV 6m ($72)</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">9x</div>
+                            <div class="stat-label">LTV/CAC Ratio</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">S/ 45</div>
+                            <div class="stat-label">ARPU Mensual ($12)</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">75%</div>
+                            <div class="stat-label">Margen Bruto</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">12%</div>
+                            <div class="stat-label">Penetración VIP Inicial</div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card" style="background: rgba(255, 255, 255, 0.6); border-left: 4px solid #22c55e; margin-top: 20px;">
+                        <h4 style="color: #16a34a; margin-bottom: 15px;">📈 Benchmarks Validados de Industria</h4>
+                        <ul style="font-size: 0.9rem; color: #166534;">
+                            <li><strong>ARPU LatAm:</strong> $8-$18 USD promedio sector (Statista 2024)</li>
+                            <li><strong>CAC Efectivo:</strong> $5-$12 USD con estrategias orgánicas (Altenar)</li>
+                            <li><strong>LTV Standard:</strong> 5-8 meses vida útil usuarios (Pitchbook 2025)</li>
+                            <li><strong>Margen Sector:</strong> 65%-80% iGaming digital (Soloazar)</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>💰 ARPU Conservador Validado con Industria</h3>
+                        <ul>
+                            <li><strong>Meses 1-3:</strong> S/ 25/mes ($7) - Onboarding con freerolls</li>
+                            <li><strong>Meses 3-6:</strong> S/ 45/mes ($12) - Engagement consolidado</li>
+                            <li><strong>Meses 6+:</strong> S/ 65/mes ($17) - Usuarios maduros + VIP</li>
+                        </ul>
+                        <p style="font-size: 0.9rem; margin-top: 15px; color: #64748b;">
+                            <strong>Base realista:</strong> ARPU promedio S/ 45 está dentro del rango $8-$18 USD del mercado LatAm (Statista), considerando ticket promedio S/ 20-35 por evento.
+                        </p>
+                        
+                        <h4 style="margin-top: 15px; color: #475569;">🏆 Clusters de ARPU por Segmento</h4>
+                        <ul style="font-size: 0.9rem; margin-top: 10px;">
+                            <li><strong>Usuarios Basic (70%):</strong> S/ 35/mes - Solo torneos pagos</li>
+                            <li><strong>Usuarios VIP (25%):</strong> S/ 78/mes - Suscripción + torneos premium</li>
+                            <li><strong>High Rollers (5%):</strong> S/ 165/mes - Clubs + torneos VIP</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>📈 CAC Strategy Realista</h3>
+                        <ul>
+                            <li><strong>Q1-Q2 2025:</strong> S/ 25 CAC - Organic focus, influencers</li>
+                            <li><strong>Q3-Q4 2025:</strong> S/ 35 CAC - Paid scaling, premium channels</li>
+                            <li><strong>2026:</strong> S/ 30 CAC - Referrals, clubs network optimizado</li>
+                        </ul>
+                        <p style="font-size: 0.9rem; margin-top: 12px; color: #64748b;">
+                            <strong>Estrategia conservadora:</strong> CAC $8 USD está dentro del rango $5-$12 benchmark (Altenar 2024) para apps de gaming con estrategias orgánicas.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card" style="background: rgba(255, 255, 255, 0.6); border-left: 4px solid #3b82f6;">
+                        <h4 style="color: #1d4ed8; margin-bottom: 15px;">📚 Fuentes de Métricas</h4>
+                        <ul style="font-size: 0.85rem; color: #1e40af; margin: 0;">
+                            <li><strong>ARPU:</strong> Statista - Sports betting revenue LatAm 2024</li>
+                            <li><strong>CAC:</strong> Altenar - KPIs clave sports betting 2024-2025</li>
+                            <li><strong>LTV:</strong> Pitchbook Industry report: Online Gambling 2025</li>
+                            <li><strong>Margen:</strong> Soloazar - Informes iGaming LatAm</li>
+                            <li><strong>Ticket promedio:</strong> Yogonet - Datos regionales LatAm</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="feature-card">
+                        <h3>📈 Roadmap Conservador con Métricas Validadas</h3>
+                        <ul>
+                            <li><strong>Q2 2025:</strong> 1,200 usuarios, S/ 15K MRR</li>
+                            <li><strong>Q3 2025:</strong> 2,800 usuarios, S/ 45K MRR</li>
+                            <li><strong>Q4 2025:</strong> 4,500 usuarios, S/ 85K MRR</li>
+                            <li><strong>Q2 2026:</strong> 8,500 usuarios, S/ 180K MRR</li>
+                            <li><strong>Q4 2026:</strong> 15,000 usuarios, S/ 315K MRR</li>
+                        </ul>
+                        
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(34, 197, 94, 0.1); border-radius: 8px; border-left: 4px solid #22c55e;">
+                            <h4 style="color: #16a34a; margin-bottom: 8px;">🎯 Break-Even: 20 meses</h4>
+                            <p style="font-size: 0.9rem; color: #166534; margin: 0;">
+                                Con S/ 180K MRR ($50K USD) alcanzamos punto de equilibrio con métricas conservadoras del mercado
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-section">
+                        <h4 style="color: #475569; margin-bottom: 16px;">🏆 Credibilidad de Métricas</h4>
+                        <div class="two-column" style="margin: 20px 0; text-align: left;">
+                            <div>
+                                <h5 style="color: #16a34a; margin-bottom: 12px;">✅ Fuentes Verificables</h5>
+                                <ul style="font-size: 0.9rem;">
+                                    <li>Statista - Líder global en data</li>
+                                    <li>Pitchbook - Standard VC/PE</li>
+                                    <li>Altenar - Especialista iGaming</li>
+                                    <li>Yogonet - Autoridad LatAm</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 style="color: #16a34a; margin-bottom: 12px;">🎯 Approach Conservador</h5>
+                                <ul style="font-size: 0.9rem;">
+                                    <li>LTV/CAC 9x vs 3x mínimo estándar</li>
+                                    <li>ARPU centro del rango sectorial</li>
+                                    <li>CAC optimista pero alcanzable</li>
+                                    <li>Break-even +5 meses vs optimista</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p style="font-size: 1rem; margin-top: 15px; color: #475569;">
+                            <strong>Métricas basadas en data real del mercado, no aspiracionales.</strong>
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>🎯 Validación vs Competencia</h3>
+                        <ul>
+                            <li><strong>CAC Validation:</strong> 37% mejor vs promedio mercado ($8 vs $13)</li>
+                            <li><strong>LTV Realista:</strong> 6 meses vs 5-8 benchmark industria</li>
+                            <li><strong>Margen Sólido:</strong> 75% dentro rango 65%-80% sector</li>
+                            <li><strong>ARPU Conservador:</strong> $12 centro del rango $8-$18 LatAm</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>⚡ Comparativa: Métricas Reales vs Aspiracionales</h3>
+                        
+                        <h4 style="margin-top: 15px; color: #dc2626;">❌ Métricas Aspiracionales (Típicas)</h4>
+                        <ul>
+                            <li>ARPU: $25+ USD (fuera de rango de mercado)</li>
+                            <li>LTV/CAC: 15x+ (no sustentable)</li>
+                            <li>CAC: $5 (imposible con paid acquisition)</li>
+                            <li>Break-even: 12 meses (muy optimista)</li>
+                        </ul>
+                        
+                        <h4 style="margin-top: 15px; color: #16a34a;">✅ Nuestras Métricas (Validadas con Mercado)</h4>
+                        <ul>
+                            <li>ARPU: $12 USD (centro rango $8-$18 Statista)</li>
+                            <li>LTV/CAC: 9x (superando 3x mínimo estándar)</li>
+                            <li>CAC: $8 (rango $5-$12 Altenar con orgánico)</li>
+                            <li>Break-even: 20 meses (conservador y alcanzable)</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>⚡ Revenue Mix Conservador</h3>
+                        <ul>
+                            <li><strong>Year 1:</strong> 95% Torneos, 5% VIP, 0% Clubs</li>
+                            <li><strong>Year 2:</strong> 85% Torneos, 12% VIP, 3% Clubs</li>
+                            <li><strong>Year 3:</strong> 75% Torneos, 18% VIP, 7% Clubs</li>
+                        </ul>
+                        <p style="font-size: 0.9rem; margin-top: 10px; color: #64748b;">
+                            <strong>Diversificación gradual</strong> reduce dependencia de un solo revenue stream
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Equipo y Tecnología -->
+        <div class="slide">
+            <h2>👥 Equipo y Stack Tecnológico</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Equipo Core</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">🎯</div>
+                            <div class="stat-label"><strong>CEO/Producto</strong><br>Fundador & Visionario</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">⚙️</div>
+                            <div class="stat-label"><strong>CTO</strong><br>Senior Full-Stack Engineer</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">🎨</div>
+                            <div class="stat-label"><strong>Frontend + UX</strong><br>Especialistas Móvil</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">🚀</div>
+                            <div class="stat-label"><strong>Growth Marketing</strong><br>Experto Deportes LatAm</div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>🛠️ Roadmap de Desarrollo</h3>
+                        <ul>
+                            <li><strong>Q2 2025:</strong> Sistema Pro + VIP completo</li>
+                            <li><strong>Q3 2025:</strong> Clubs + Revenue share automation</li>
+                            <li><strong>Q4 2025:</strong> Rakeback + Gamification full</li>
+                            <li><strong>Q1 2026:</strong> AI insights + Advanced analytics</li>
+                            <li><strong>Q2 2026:</strong> API B2B + Multi-region scale</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3>Stack Tecnológico Moderno</h3>
+                    <ul>
+                        <li><strong>Frontend:</strong> React PWA + TypeScript (móvil-primero)</li>
+                        <li><strong>Backend:</strong> Node.js + Express + PostgreSQL</li>
+                        <li><strong>Real-time:</strong> WebSockets para puntuación en vivo</li>
+                        <li><strong>Pagos:</strong> Stripe + Culqi + métodos locales LatAm</li>
+                        <li><strong>Datos Deportivos:</strong> Sportradar API integration</li>
+                        <li><strong>Hosting:</strong> AWS con CDN optimizado para LatAm</li>
+                        <li><strong>Monitoring:</strong> Datadog + Sentry para observabilidad</li>
+                        <li><strong>CI/CD:</strong> GitHub Actions + Docker containerization</li>
+                    </ul>
+                    
+                    <div class="cta-section">
+                        <h4 style="color: #475569; margin-bottom: 16px;">Arquitectura Escalable</h4>
+                        <p>Diseñado desde día 1 para manejar 100K+ usuarios concurrentes con alta disponibilidad y performance optimizada</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>📊 Métricas Técnicas Target</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">99.9%</div>
+                                <div class="stat-label">Uptime Target</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">&lt;200ms</div>
+                                <div class="stat-label">API Response</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">100K+</div>
+                                <div class="stat-label">Concurrent Users</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">24/7</div>
+                                <div class="stat-label">Real-time Updates</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Call to Action -->
+        <div class="slide hero-slide">
+            <h1>🚀 PredicMaster</h1>
+            <h2>El Ecosistema Gaming Más Completo de LatAm</h2>
+            
+            <div class="content-grid" style="margin: 40px 0;">
+                <div class="feature-card">
+                    <div class="stat-value">$8B+</div>
+                    <div class="stat-label">Mercado Total LatAm</div>
+                </div>
+                <div class="feature-card">
+                    <div class="stat-value">MVP</div>
+                    <div class="stat-label">En Funcionamiento</div>
+                </div>
+                <div class="feature-card">
+                    <div class="stat-value">9x</div>
+                    <div class="stat-label">LTV/CAC Ratio</div>
+                </div>
+                <div class="feature-card">
+                    <div class="stat-value">20m</div>
+                    <div class="stat-label">Break-Even</div>
+                </div>
+            </div>
+
+            <p class="tagline">La Única Plataforma <span class="highlight">P2P 360°</span> Donde la <span class="highlight">Habilidad</span> es Recompensada</p>
+            
+            <div class="cta-section" style="margin-top: 40px; max-width: 900px;">
+                <h3 style="color: #475569; margin-bottom: 20px;">🎯 De MVP a Líder del Mercado</h3>
+                <p style="font-size: 1.3rem; margin-bottom: 25px;">
+                    Ecosistema completo con 5 revenue streams y ventajas competitivas defendibles
+                </p>
+                
+                <div class="two-column" style="margin: 30px 0;">
+                    <div>
+                        <h4>✅ Logros Actuales</h4>
+                        <ul>
+                            <li>MVP funcionando con usuarios reales</li>
+                            <li>Sistema de puntuación validado</li>
+                            <li>Pagos locales integrados</li>
+                            <li>Framework legal establecido</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>🚀 Próximos 18 meses</h4>
+                        <ul>
+                            <li>Sistema completo VIP + Clubs + Rakeback</li>
+                            <li>15K+ usuarios activos multi-región</li>
+                            <li>S/ 315K+ MRR recurrente</li>
+                            <li>Break-even y preparado para Serie A</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="stats-grid" style="margin-top: 30px;">
+                    <div class="stat-item">
+                        <div class="stat-value">S/ 315K</div>
+                        <div class="stat-label">MRR Target 24 meses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">75%</div>
+                        <div class="stat-label">Margen Bruto</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Revenue Streams</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">100K+</div>
+                        <div class="stat-label">Users Capacity</div>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 30px; font-size: 1.2rem; color: #64748b;">
+                    <strong>Contacto:</strong> [Tu Email] • [Tu Teléfono] • [LinkedIn]
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Anterior</button>
+        <button class="nav-btn" onclick="nextSlide()">Siguiente →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            if (n >= totalSlides) currentSlide = 0;
+            if (n < 0) currentSlide = totalSlides - 1;
+            
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

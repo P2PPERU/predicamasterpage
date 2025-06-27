@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PredicMaster - SaaS Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: #f8fafc;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .presentation {
+            max-width: 100vw;
+            margin: 0;
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 80px 60px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .slide h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            text-align: center;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.025em;
+        }
+
+        .slide h2 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #f8fafc;
+            letter-spacing: -0.025em;
+        }
+
+        .slide h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #3b82f6;
+            letter-spacing: -0.025em;
+        }
+
+        .slide p, .slide li {
+            font-size: 1.25rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+            color: #cbd5e1;
+        }
+
+        .slide ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .slide li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .slide li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .hero-slide .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 32px;
+            opacity: 0.9;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .hero-slide .tagline {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-top: 40px;
+            color: #3b82f6;
+            letter-spacing: -0.025em;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
+            width: 100%;
+        }
+
+        .metric-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            letter-spacing: -0.025em;
+        }
+
+        .metric-label {
+            font-size: 1rem;
+            color: #94a3b8;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 16px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #f8fafc;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-btn:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 32px;
+            right: 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            backdrop-filter: blur(20px);
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            width: 100%;
+            align-items: start;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
+            width: 100%;
+        }
+
+        .feature-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 32px;
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            color: #3b82f6;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin-bottom: 12px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 12px;
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            color: #fbbf24;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 12px;
+        }
+
+        .cta-section {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 48px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 24px;
+            }
+            
+            .slide h1 {
+                font-size: 2.5rem;
+            }
+            
+            .slide h2 {
+                font-size: 2rem;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #3b82f6;
+            position: fixed;
+            top: 32px;
+            left: 32px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">PredicMaster</div>
+    
+    <div class="presentation">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">9</span>
+        </div>
+
+        <!-- Slide 1: Hero -->
+        <div class="slide active hero-slide">
+            <h1>🚀 PredicMaster</h1>
+            <p class="subtitle">La Plataforma de Torneos de Predicción Deportiva Más Innovadora de Latinoamérica</p>
+            <p class="tagline">Donde la <span class="highlight">Habilidad</span> Vence a la <span class="highlight">Suerte</span></p>
+            <div class="metrics-grid" style="margin-top: 60px;">
+                <div class="metric-card">
+                    <div class="metric-value">P2P</div>
+                    <div class="metric-label">Competencia Directa</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">0%</div>
+                    <div class="metric-label">Ventaja de Casa</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">MVP</div>
+                    <div class="metric-label">En Funcionamiento</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: El Problema -->
+        <div class="slide">
+            <h2>🎯 El Problema del Mercado Actual</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Limitaciones Actuales</h3>
+                    <ul>
+                        <li>Las casas de apuestas siempre tienen ventaja matemática</li>
+                        <li>Los usuarios compiten contra la casa, no entre ellos</li>
+                        <li>Enfoque en suerte más que en habilidad real</li>
+                        <li>Falta de transparencia en algoritmos y probabilidades</li>
+                        <li>Experiencia de usuario fragmentada y confusa</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Oportunidad de Mercado</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">$8B+</div>
+                            <div class="metric-label">Mercado LatAm Anual</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">60M+</div>
+                            <div class="metric-label">Aficionados Activos</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">85%</div>
+                            <div class="metric-label">Adopción Móvil</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: La Solución -->
+        <div class="slide">
+            <h2>💡 Nuestra Solución Revolucionaria</h2>
+            <h3 style="text-align: center; margin-bottom: 40px;">Plataforma P2P de Torneos de Predicción Basada en Habilidad</h3>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🧠 Sistema de Puntuación Inteligente</h4>
+                    <p><strong>Fórmula:</strong> 100 - Probabilidad del mercado</p>
+                    <p>Premia el verdadero análisis y la identificación de valor, alejando el juego del azar puro</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎯 Mecánicas Únicas Patentables</h4>
+                    <p><strong>Sistema Cascada + Bonificaciones Duales</strong></p>
+                    <p>Pick Master estratégico y Pick BIG automático crean experiencia única en el mercado</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔄 Ecosistema Completo</h4>
+                    <p><strong>Monetización Circular</strong></p>
+                    <p>Torneos, VIP, tipsters, cosméticos y marketplace en una sola plataforma</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📱 Experiencia Móvil-Primero</h4>
+                    <p><strong>PWA Optimizada para LatAm</strong></p>
+                    <p>Diseño nativo, pagos locales, y UX adaptada a la región</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Producto en Funcionamiento -->
+        <div class="slide">
+            <h2>🎮 Producto MVP Activo</h2>
+            <div class="two-column">
+                <div>
+                    <h3>✅ Actualmente En Vivo <span class="status-badge">Live</span></h3>
+                    <ul>
+                        <li>Torneos automatizados funcionando 24/7</li>
+                        <li>Sistema de puntuación implementado y validado</li>
+                        <li>Pagos integrados (PEN/USD) con Stripe</li>
+                        <li>PWA móvil optimizada y responsiva</li>
+                        <li>Usuarios reales compitiendo diariamente</li>
+                        <li>API de datos deportivos en tiempo real</li>
+                    </ul>
+                    
+                    <h3>🚀 Próximas Funcionalidades <span class="coming-soon-badge">Q2 2025</span></h3>
+                    <ul>
+                        <li>Sistema cascada avanzado (3 picks por partido)</li>
+                        <li>Bonificaciones duales estratégicas</li>
+                        <li>Cambio de predicción a medio tiempo</li>
+                        <li>Sistema VIP con análisis premium</li>
+                        <li>Partnerships con tipsters reconocidos</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>📊 Métricas de Tracción Temprana</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">PEN 283</div>
+                            <div class="metric-label">Premios Distribuidos</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">PEN 15</div>
+                            <div class="metric-label">Buy-in Promedio</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">1/20</div>
+                            <div class="metric-label">Ratio Participantes</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">5%</div>
+                            <div class="metric-label">Ocupación Inicial</div>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-section">
+                        <h4 style="color: #3b82f6; margin-bottom: 16px;">Ventaja Competitiva</h4>
+                        <p>Mientras la competencia tiene solo ideas, nosotros tenemos un producto funcionando con usuarios reales pagando y compitiendo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Ecosistema de Monetización -->
+        <div class="slide">
+            <h2>💰 Ecosistema de Monetización Circular</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🏆 Núcleo: Torneos</h4>
+                    <p><strong>8% comisión por entrada</strong></p>
+                    <p>• Torneos S/ 5-20: Volumen masivo<br>
+                    • Torneos S/ 20-100: Jugadores serios<br>
+                    • Torneos S/ 100+: VIP/Corporativos</p>
+                </div>
+                <div class="feature-card">
+                    <h4>💎 Sistema VIP Premium</h4>
+                    <p><strong>S/ 45/mes ($13 USD)</strong></p>
+                    <p>• Análisis premium con tipsters<br>
+                    • Torneos exclusivos VIP<br>
+                    • Estadísticas avanzadas<br>
+                    • Alertas y picks especiales</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⭐ Clubs & Tipsters</h4>
+                    <p><strong>Revenue share + diamantes</strong></p>
+                    <p>• Compra de "diamantes" (moneda virtual)<br>
+                    • Torneos exclusivos premium<br>
+                    • Sistema referidos multinivel</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🛒 Marketplace & Cosméticos</h4>
+                    <p><strong>Monetización adicional</strong></p>
+                    <p>• Personalización de perfiles<br>
+                    • Marketplace interno<br>
+                    • Publicidad contextual<br>
+                    • Branded tournaments</p>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <h4 style="color: #3b82f6; margin-bottom: 16px;">🔄 Monetización Circular</h4>
+                <p>Los usuarios consumen y gastan todo dentro del ecosistema, creando una plataforma autosustentable con múltiples streams de ingresos recurrentes</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Go-to-Market -->
+        <div class="slide">
+            <h2>📈 Estrategia Go-to-Market LatAm</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Fase 1: Validación Perú (Q1-Q2 2025)</h3>
+                    <ul>
+                        <li><strong>Objetivo:</strong> 2,000 usuarios activos mensuales</li>
+                        <li>Partnerships con tipsters Liga 1 Perú</li>
+                        <li>Marketing orgánico TikTok/Instagram/YouTube</li>
+                        <li>Torneos de entrada S/ 5 para onboarding</li>
+                        <li>Programa referidos (S/ 10 por usuario)</li>
+                        <li>Colaboraciones con influencers deportivos</li>
+                    </ul>
+                    
+                    <h3>Fase 2: Expansión Regional (Q3-Q4 2025)</h3>
+                    <ul>
+                        <li><strong>Objetivo:</strong> 8,000 usuarios multi-país</li>
+                        <li>Lanzamiento México (Liga MX)</li>
+                        <li>Adquisición pagada estratégica</li>
+                        <li>Partnerships con medios deportivos</li>
+                        <li>Sistema VIP y tipsters completo</li>
+                        <li>Torneos corporativos y branded</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>KPIs y Métricas Objetivo</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">35%</div>
+                            <div class="metric-label">Retención 30 días</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">12min</div>
+                            <div class="metric-label">Duración Sesión</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">0.25</div>
+                            <div class="metric-label">Coeficiente Viral</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">18%</div>
+                            <div class="metric-label">Conversión VIP</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">S/ 35</div>
+                            <div class="metric-label">CAC Blended ($10)</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">S/ 75</div>
+                            <div class="metric-label">ARPU Mensual ($22)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Unit Economics -->
+        <div class="slide">
+            <h2>📊 Unit Economics y Proyecciones</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Métricas Financieras Clave</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">S/ 35</div>
+                            <div class="metric-label">CAC ($10 USD)</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">S/ 420</div>
+                            <div class="metric-label">LTV 18m ($125)</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">12x</div>
+                            <div class="metric-label">LTV/CAC Ratio</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">68%</div>
+                            <div class="metric-label">Margen Contribución</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">78%</div>
+                            <div class="metric-label">Margen Bruto</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">35%</div>
+                            <div class="metric-label">Penetración VIP</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Roadmap de Crecimiento</h3>
+                    <ul>
+                        <li><strong>Q2 2025:</strong> 2K usuarios, S/ 25K MRR</li>
+                        <li><strong>Q3 2025:</strong> 5K usuarios, S/ 80K MRR</li>
+                        <li><strong>Q4 2025:</strong> 8K usuarios, S/ 150K MRR</li>
+                        <li><strong>Q2 2026:</strong> 15K usuarios, S/ 350K MRR</li>
+                        <li><strong>Q4 2026:</strong> 25K usuarios, S/ 600K MRR</li>
+                    </ul>
+                    
+                    <div class="cta-section">
+                        <h4 style="color: #3b82f6; margin-bottom: 16px;">Proyección Break-Even</h4>
+                        <div class="metric-value" style="font-size: 2rem; margin-bottom: 8px;">15 meses</div>
+                        <p>Con S/ 350K MRR ($105K USD) alcanzamos punto de equilibrio y escalabilidad sostenible</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Equipo y Tecnología -->
+        <div class="slide">
+            <h2>👥 Equipo y Stack Tecnológico</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Equipo Core</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">🎯</div>
+                            <div class="metric-label"><strong>CEO/Producto</strong><br>Fundador & Visionario</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">⚙️</div>
+                            <div class="metric-label"><strong>CTO</strong><br>Senior Full-Stack Engineer</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">🎨</div>
+                            <div class="metric-label"><strong>Frontend + UX</strong><br>Especialistas Móvil</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">🚀</div>
+                            <div class="metric-label"><strong>Growth Marketing</strong><br>Experto Deportes LatAm</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Stack Tecnológico Moderno</h3>
+                    <ul>
+                        <li><strong>Frontend:</strong> React PWA + TypeScript (móvil-primero)</li>
+                        <li><strong>Backend:</strong> Node.js + Express + PostgreSQL</li>
+                        <li><strong>Real-time:</strong> WebSockets para puntuación en vivo</li>
+                        <li><strong>Pagos:</strong> Stripe + Culqi + métodos locales LatAm</li>
+                        <li><strong>Datos Deportivos:</strong> Sportradar API integration</li>
+                        <li><strong>Hosting:</strong> AWS con CDN optimizado para LatAm</li>
+                        <li><strong>Monitoring:</strong> Datadog + Sentry para observabilidad</li>
+                        <li><strong>CI/CD:</strong> GitHub Actions + Docker containerization</li>
+                    </ul>
+                    
+                    <div class="cta-section">
+                        <h4 style="color: #3b82f6; margin-bottom: 16px;">Arquitectura Escalable</h4>
+                        <p>Diseñado desde día 1 para manejar 100K+ usuarios concurrentes con alta disponibilidad y performance optimizada</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Call to Action -->
+        <div class="slide hero-slide">
+            <h1>🚀 PredicMaster</h1>
+            <h2>Transformando el Gaming Deportivo en LatAm</h2>
+            <div class="metrics-grid" style="margin: 50px 0;">
+                <div class="metric-card">
+                    <div class="metric-value">$8B+</div>
+                    <div class="metric-label">Mercado Total LatAm</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">MVP</div>
+                    <div class="metric-label">En Funcionamiento</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">12x</div>
+                    <div class="metric-label">LTV/CAC Ratio</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">15m</div>
+                    <div class="metric-label">Break-Even</div>
+                </div>
+            </div>
+            <p class="tagline">La Única Plataforma P2P Donde la <span class="highlight">Habilidad</span> es Recompensada</p>
+            <div class="cta-section" style="margin-top: 40px;">
+                <h3 style="color: #3b82f6; margin-bottom: 20px;">¿Listo para Ser Parte de la Revolución?</h3>
+                <p style="font-size: 1.2em; margin-bottom: 24px;">
+                    Únete a nosotros en la transformación del gaming deportivo en Latinoamérica
+                </p>
+                <p style="font-size: 1.1em; color: #94a3b8;">
+                    <strong>Contacto:</strong> [Tu Email] • [Tu Teléfono] • [LinkedIn]
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Anterior</button>
+        <button class="nav-btn" onclick="nextSlide()">Siguiente →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            if (n >= totalSlides) currentSlide = 0;
+            if (n < 0) currentSlide = totalSlides - 1;
+            
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
