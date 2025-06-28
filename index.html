@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PredicMaster - Pitch Deck</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: #f8fafc;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .presentation {
+            max-width: 100vw;
+            margin: 0;
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 60px 40px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .slide h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 50%, #0284c7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.025em;
+            text-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
+        }
+
+        .slide h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #e2e8f0;
+            letter-spacing: -0.025em;
+        }
+
+        .slide h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #94a3b8;
+            letter-spacing: -0.025em;
+        }
+
+        .hero-slide .subtitle {
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            color: #cbd5e1;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .hero-slide .tagline {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-top: 40px;
+            color: #e2e8f0;
+            letter-spacing: -0.025em;
+            text-align: center;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 35px;
+            border-radius: 20px;
+            backdrop-filter: blur(25px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 40px -15px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(56, 189, 248, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #38bdf8, #0ea5e9, #0284c7, #38bdf8);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 200% 0; }
+            50% { background-position: -200% 0; }
+        }
+
+        .feature-card:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .feature-card:hover:after {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 
+                0 30px 60px -15px rgba(56, 189, 248, 0.3),
+                0 0 0 1px rgba(56, 189, 248, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        /* Asegurar que todos los cards del hero se vean iguales */
+        .hero-slide .feature-card {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: #e2e8f0;
+        }
+
+        .hero-slide .feature-card .stat-value {
+            color: #38bdf8;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .hero-slide .feature-card .stat-label {
+            color: #cbd5e1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px -10px rgba(56, 189, 248, 0.2);
+            border-color: #0ea5e9;
+        }
+
+        .accent-card {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white;
+            border: 1px solid #0284c7;
+        }
+
+        .accent-card:before {
+            background: linear-gradient(90deg, #38bdf8, #7dd3fc, #bae6fd);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .stat-item {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 15px 30px -10px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(56, 189, 248, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover:before {
+            transform: scaleX(1);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-6px) scale(1.03);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 
+                0 20px 40px -10px rgba(56, 189, 248, 0.2),
+                0 0 0 1px rgba(56, 189, 248, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #38bdf8;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            color: #cbd5e1;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            width: 100%;
+            max-width: 1400px;
+            align-items: start;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9));
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #e2e8f0;
+            padding: 16px 32px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(25px);
+            box-shadow: 
+                0 10px 30px -5px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(56, 189, 248, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-btn:hover:before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(145deg, rgba(56, 189, 248, 0.1), rgba(30, 41, 59, 0.95));
+            border-color: rgba(56, 189, 248, 0.5);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 
+                0 20px 40px -5px rgba(56, 189, 248, 0.3),
+                0 0 0 1px rgba(56, 189, 248, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        .nav-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .nav-btn i {
+            margin: 0 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-btn:hover i.fa-chevron-left {
+            transform: translateX(-4px);
+        }
+
+        .nav-btn:hover i.fa-chevron-right {
+            transform: translateX(4px);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            backdrop-filter: blur(20px);
+            color: #e2e8f0;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #38bdf8;
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 1000;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .cta-section {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9));
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 50px;
+            border-radius: 24px;
+            margin: 40px 0;
+            text-align: center;
+            backdrop-filter: blur(30px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 25px 50px -15px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(56, 189, 248, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .cta-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #38bdf8, #0ea5e9, #0284c7, #38bdf8);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .cta-section:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .problem-visual {
+            background: linear-gradient(145deg, #dc2626 0%, #ef4444 50%, #f87171 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 25px 50px -15px rgba(220, 38, 38, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .problem-visual:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .solution-visual {
+            background: linear-gradient(145deg, #059669 0%, #10b981 50%, #34d399 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 25px 50px -15px rgba(5, 150, 105, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .solution-visual:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .slide ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .slide li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 30px;
+            color: #cbd5e1;
+            font-size: 1.1rem;
+        }
+
+        .slide li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #38bdf8;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .revenue-split {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 25px;
+            border-radius: 16px;
+            margin: 25px 0;
+            border: 1px solid #334155;
+        }
+
+        .split-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .split-percentage {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #38bdf8;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .split-arrow {
+            font-size: 2.5rem;
+            color: #0ea5e9;
+            margin: 0 25px;
+        }
+
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #38bdf8, #0ea5e9, #0284c7);
+            background-size: 200% 100%;
+            animation: progressShimmer 2s ease-in-out infinite;
+            transition: width 0.3s ease;
+            z-index: 1001;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        @keyframes progressShimmer {
+            0%, 100% { background-position: 200% 0; }
+            50% { background-position: -200% 0; }
+        }
+
+        .slide h3 i, .feature-card h3 i, .feature-card h4 i {
+            background: linear-gradient(45deg, #38bdf8, #0ea5e9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-right: 12px;
+            font-size: 1.2em;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover h3 i, .feature-card:hover h4 i {
+            transform: scale(1.1) rotate(5deg);
+            text-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+        }
+
+        .slide h1, .slide h2 {
+            position: relative;
+            z-index: 1;
+        }
+
+        .slide h1:after, .slide h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+            border-radius: 2px;
+        }
+
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(2, 132, 199, 0.08) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(1deg); }
+            66% { transform: translateY(10px) rotate(-1deg); }
+        }
+
+        .metric-highlight {
+            background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 20px;
+            }
+            
+            .slide h1 {
+                font-size: 2.8rem;
+            }
+            
+            .slide h2 {
+                font-size: 2.2rem;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navigation {
+                bottom: 20px;
+            }
+
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-indicator" id="progress"></div>
+    <div class="animated-bg"></div>
+    <div class="logo">🚀 PredicMaster</div>
+    
+    <div class="presentation">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">11</span>
+        </div>
+
+        <div class="slide active hero-slide">
+            <h1>⚡ PredicMaster</h1>
+            <p class="subtitle">El Primer Ecosistema P2P de Predicción Deportiva en LatAm</p>
+            <p class="tagline">Donde la <span class="highlight">Habilidad</span> Vence a la <span class="highlight">Suerte</span></p>
+            
+            <div class="content-grid" style="margin-top: 50px;">
+                <div class="feature-card accent-card">
+                    <div class="stat-value">$8B+</div>
+                    <div class="stat-label">Mercado Total LatAm</div>
+                </div>
+                <div class="feature-card">
+                    <div class="stat-value">MVP</div>
+                    <div class="stat-label">En Desarrollo</div>
+                </div>
+                <div class="feature-card">
+                    <div class="stat-value">0%</div>
+                    <div class="stat-label">Ventaja de Casa</div>
+                </div>
+                <div class="feature-card">
+                    <div class="stat-value">5.5x</div>
+                    <div class="stat-label">LTV/CAC Ratio</div>
+                </div>
+            </div>
+
+            <div class="cta-section" style="max-width: 800px;">
+                <h3 style="margin-bottom: 20px;">🎯 Equipo Fundador con Track Record</h3>
+                <div class="two-column" style="text-align: left;">
+                    <div>
+                        <h4 style="color: #38bdf8;">Alexander García - CEO</h4>
+                        <ul style="font-size: 0.95rem; margin-top: 10px;">
+                            <li>Pioneer PPPoker Perú (volumen significativo)</li>
+                            <li>Ex-socio locales físicos apuestas</li>
+                            <li>Developer del MVP actual</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #38bdf8;">Roger Alvarado - COO</h4>
+                        <ul style="font-size: 0.95rem; margin-top: 10px;">
+                            <li>Ex-Manager PPPoker expansión Perú</li>
+                            <li>Network gaming LatAm 5+ años</li>
+                            <li>Especialista growth operations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🎯 El Problema Gigante</h2>
+            <div class="problem-visual">
+                <h3 style="color: white; text-align: center;">Las Casas Siempre Ganan</h3>
+                <div class="stats-grid">
+                    <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                        <div class="stat-value" style="color: white;">97%</div>
+                        <div class="stat-label" style="color: rgba(255,255,255,0.8);">Usuarios pierden long-term</div>
+                    </div>
+                    <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                        <div class="stat-value" style="color: white;">5-12%</div>
+                        <div class="stat-label" style="color: rgba(255,255,255,0.8);">Ventaja matemática casa</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <h3>Limitaciones del Modelo Actual</h3>
+                    <ul>
+                        <li>Usuario vs Casa (ventaja matemática imposible)</li>
+                        <li>Enfoque en suerte, no en análisis real</li>
+                        <li>Un error = perder todo el parlay</li>
+                        <li>Recompensas irrisorias para jugadas "seguras"</li>
+                        <li>Sin reconocimiento al expertise analítico</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Oportunidad Masiva</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">60M+</div>
+                            <div class="stat-label">Usuarios LatAm</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">85%</div>
+                            <div class="stat-label">Ya apuesta móvil</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">$2.3B</div>
+                            <div class="stat-label">Pérdidas usuarios LatAm 2024</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">S/ 20</div>
+                            <div class="stat-label">Ticket promedio</div>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <p style="font-style: italic; font-size: 1.1rem;">
+                            <strong>"Un mercado gigante, digitalizado y huérfano de innovación transparente"</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>💡 Nuestra Solución Disruptiva</h2>
+            <h3 style="text-align: center; margin-bottom: 30px;">Ecosistema P2P de Gaming Deportivo Basado en Habilidad</h3>
+            
+            <div class="solution-visual">
+                <h3 style="color: white; text-align: center;">Sistema P2P Skill-Based + Innovaciones Únicas</h3>
+                <p style="color: rgba(255,255,255,0.9); text-align: center; font-size: 1.2rem; margin-top: 15px;">
+                    Usuario vs Usuario • 0% Ventaja Casa • Habilidad Recompensada
+                </p>
+            </div>
+
+            <div style="background: rgba(56, 189, 248, 0.1); padding: 25px; border-radius: 16px; border-left: 4px solid #38bdf8; margin: 30px auto; max-width: 1200px;">
+                <p style="font-style: italic; font-size: 1.2rem; color: #e2e8f0; margin: 0; text-align: center;">
+                    <strong>"Combinamos lo mejor de torneos de poker, estadísticas deportivas, fantasy y clubs de poker para crear una solución innovadora que penetrará en el mundo de las sportbets tradicionales en Sudamérica."</strong>
+                </p>
+            </div>
+
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h3><i class="fas fa-brain"></i> Sistema Puntuación Inteligente</h3>
+                    <p><strong>Fórmula:</strong> 100 - Probabilidad del mercado</p>
+                    <p>Premia identificar valor real, no solo aciertos</p>
+                </div>
+                <div class="feature-card">
+                    <h3><i class="fas fa-layer-group"></i> Mecánicas Patentables</h3>
+                    <p><strong>Sistema Cascada + Bonificaciones Duales</strong></p>
+                    <p>Pick Master estratégico + Pick BIG automático</p>
+                </div>
+                <div class="feature-card">
+                    <h3><i class="fas fa-sync-alt"></i> 3 Revenue Streams</h3>
+                    <p><strong>Torneos + VIP + Clubs</strong></p>
+                    <p>Monetización circular con sistema B2B integrado</p>
+                </div>
+                <div class="feature-card">
+                    <h3><i class="fas fa-mobile-alt"></i> Mobile-First LatAm</h3>
+                    <p><strong>PWA + Pagos Locales</strong></p>
+                    <p>UX optimizada para la región</p>
+                </div>
+            </div>
+
+            <div class="cta-section" style="margin-top: 40px;">
+                <h3 style="margin-bottom: 25px;">🌎 Visión de Expansión Global</h3>
+                <p style="font-size: 1.2rem; margin-bottom: 20px;">
+                    <strong>Posicionar PredicMaster como el juego de habilidad mundial</strong> con torneos internacionales, gamificando las predicciones deportivas y creando oportunidades para que talentos de las predicciones puedan vivir de su expertise analítico.
+                </p>
+                <div class="two-column" style="text-align: left;">
+                    <div>
+                        <h4 style="color: #38bdf8;">🏆 Ecosystem de Talentos</h4>
+                        <ul>
+                            <li>Torneos internacionales con premios significativos</li>
+                            <li>Rankings globales de predictores</li>
+                            <li>Profesionalización del análisis deportivo</li>
+                            <li>Oportunidades de patrocinios y endorsements</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #38bdf8;">🎮 Gamificación Avanzada</h4>
+                        <ul>
+                            <li>Sistema de niveles y achievements mundiales</li>
+                            <li>Ligas regionales e internacionales</li>
+                            <li>Eventos especiales (Champions, Mundial)</li>
+                            <li>Reconocimiento global de expertise</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🏆 Ventaja Competitiva Irreplicable</h2>
+            <div class="cta-section" style="margin-bottom: 40px;">
+                <h3 style="color: #ef4444; margin-bottom: 20px;">Las Casas Pueden Copiar el Código, NO la Red</h3>
+                <p style="font-size: 1.3rem;">Network Moat = Ventaja Defendible</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h3><i class="fas fa-rocket"></i> First Mover LatAm</h3>
+                    <ul>
+                        <li>100% market share inicial P2P skill-based</li>
+                        <li>18-24 meses head start vs grandes casas</li>
+                        <li>Market education a nuestro favor</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3><i class="fas fa-network-wired"></i> Red Establecida</h3>
+                    <ul>
+                        <li><strong>5+ años:</strong> Construyendo network gaming LatAm</li>
+                        <li><strong>PPPoker validation:</strong> Movimos exitosamente B2B</li>
+                        <li><strong>Trust built:</strong> Credibilidad ejecutando proyectos</li>
+                        <li><strong>CAC reducido:</strong> Leverage network 60% menor costo</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3><i class="fas fa-shield-alt"></i> Barreras Entrada</h3>
+                    <ul>
+                        <li><strong>Network building:</strong> 2-3 años para competencia</li>
+                        <li><strong>B2B execution:</strong> Learning curve incentives</li>
+                        <li><strong>Local expertise:</strong> Matices de cada mercado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="two-column" style="margin-top: 40px;">
+                <div class="feature-card">
+                    <h3 style="color: #22c55e;">✅ Nuestras Ventajas</h3>
+                    <ul>
+                        <li>Red establecida 5+ años gaming LatAm</li>
+                        <li>CAC 60% reducido por network leverage</li>
+                        <li>PPPoker B2B execution probada</li>
+                        <li>3-6 meses market entry vs 18+ competencia</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3 style="color: #ef4444;">❌ Competencia NO Puede Copiar</h3>
+                    <ul>
+                        <li>Track record ejecutando en LatAm</li>
+                        <li>Relationships warm desde día 1</li>
+                        <li>Trust y credibilidad pre-establecida</li>
+                        <li>Especialización vs diversification</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🔨 MVP Técnicamente en Desarrollo</h2>
+            <div class="cta-section">
+                <h3>📱 Desarrollo Activo con Core Features Funcionando</h3>
+                <p style="font-size: 1.2rem;">Mientras la competencia tiene mockups, nosotros tenemos código funcionando y testing interno</p>
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <h3>⚡ Core Features en Progreso</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">50%</div>
+                            <div class="stat-label">Avance MVP</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">Testing</div>
+                            <div class="stat-label">Interno Activo</div>
+                        </div>
+                    </div>
+                    
+                    <ul>
+                        <li>Dashboard con métricas en tiempo real (parcialmente funcional)</li>
+                        <li>Sistema de torneos (en fase de integración y pruebas)</li>
+                        <li>Balance de usuarios y recarga (implementado en parte)</li>
+                        <li>Freerolls y torneos pagos (estructura básica lista)</li>
+                        <li>Rankings y gestión de jugadores (en construcción)</li>
+                        <li>PWA móvil (optimización en curso)</li>
+                        <li>Panel admin y pagos (estructura básica creada)</li>
+                        <li>Estados automatizados (en desarrollo)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>🚀 Roadmap Actualizado Q2-Q3 2025</h3>
+                    <ul>
+                        <li><strong>Julio-Agosto:</strong> Culminar desarrollo MVP y testeo interno</li>
+                        <li><strong>Septiembre:</strong> Primera beta cerrada con usuarios seleccionados</li>
+                        <li><strong>Octubre:</strong> Iteración sobre feedback y lanzamiento público Perú</li>
+                        <li><strong>Fin 2025:</strong> Sistema VIP + estadísticas avanzadas</li>
+                        <li><strong>2026:</strong> Clubs + gamificación completa</li>
+                    </ul>
+
+                    <div class="feature-card">
+                        <h4 style="margin-bottom: 15px;">🎯 Ventaja Técnica Real</h4>
+                        <ul>
+                            <li>Desarrollo propio, sin plantillas ni mockups</li>
+                            <li>Core features funcionando parcialmente</li>
+                            <li>Arquitectura escalable desde el inicio</li>
+                            <li>Validación continua con potenciales usuarios</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>💰 Modelo de Monetización Enfocado</h2>
+            <div class="content-grid">
+                <div class="feature-card accent-card">
+                    <h3 style="color: white;"><i class="fas fa-trophy"></i> Torneos B2C (70%)</h3>
+                    <p style="color: rgba(255,255,255,0.9);"><strong>Take Rate Progresivo</strong></p>
+                    <div class="stats-grid">
+                        <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                            <div class="stat-value" style="color: white;">12%</div>
+                            <div class="stat-label" style="color: rgba(255,255,255,0.8);">S/5-35</div>
+                        </div>
+                        <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                            <div class="stat-value" style="color: white;">10%</div>
+                            <div class="stat-label" style="color: rgba(255,255,255,0.8);">S/35+</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <h3><i class="fas fa-gem"></i> VIP B2C (20%)</h3>
+                    <div class="stat-value">S/ 33/mes</div>
+                    <p>Suscripción con valor real</p>
+                    <ul>
+                        <li>Distintivos sociales únicos</li>
+                        <li>Acceso a picks exclusivos</li>
+                        <li>Análisis avanzado y estadísticas</li>
+                        <li>Acceso a torneos exclusivos</li>
+                        <li>Bonificaciones mensuales</li>
+                        <li>Early access nuevas features</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3><i class="fas fa-users"></i> Clubs B2B (10%)</h3>
+                    <p><strong>Revenue Share 80/20 y 50/50</strong></p>
+                    <ul>
+                        <li>Managers incentivados traer usuarios</li>
+                        <li>Escalabilidad unlimited</li>
+                        <li>Content expertise sin investment</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h3>📊 Unit Economics Validados</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">S/ 40</div>
+                        <div class="stat-label">ARPU Mensual</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">S/ 50</div>
+                        <div class="stat-label">CAC Blended</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">4.8x</div>
+                        <div class="stat-label">LTV/CAC Ratio</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">75%</div>
+                        <div class="stat-label">Margen Bruto</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🏢 Sistema Clubs - Revenue Share B2B</h2>
+            <div class="two-column">
+                <div class="feature-card accent-card">
+                    <h3 style="color: white;">Estructura Revenue Share</h3>
+                    
+                    <h4 style="color: white;">Comisiones Torneos</h4>
+                    <div class="revenue-split">
+                        <div class="split-item">
+                            <div class="split-percentage" style="color: white;">80%</div>
+                            <div class="stat-label" style="color: rgba(255,255,255,0.8);">Club Manager</div>
+                        </div>
+                        <div class="split-arrow" style="color: white;">→</div>
+                        <div class="split-item">
+                            <div class="split-percentage" style="color: white;">20%</div>
+                            <div class="stat-label" style="color: rgba(255,255,255,0.8);">PredicMaster</div>
+                        </div>
+                    </div>
+
+                    <h4 style="color: white;">Suscripciones VIP</h4>
+                    <div class="revenue-split">
+                        <div class="split-item">
+                            <div class="split-percentage" style="color: white;">50%</div>
+                            <div class="stat-label" style="color: rgba(255,255,255,0.8);">Club Manager</div>
+                        </div>
+                        <div class="split-arrow" style="color: white;">⇄</div>
+                        <div class="split-item">
+                            <div class="split-percentage" style="color: white;">50%</div>
+                            <div class="stat-label" style="color: rgba(255,255,255,0.8);">PredicMaster</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="feature-card">
+                        <h3>💡 Beneficios del Modelo B2B</h3>
+                        <ul>
+                            <li><strong>Expansión masiva:</strong> Managers incentivados</li>
+                            <li><strong>CAC compartido:</strong> Costos reducidos 60%</li>
+                            <li><strong>Content expertise:</strong> Sin investment directo</li>
+                            <li><strong>Escalabilidad:</strong> Unlimited clubs</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>📈 Ejemplo: Club 100 Miembros</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">S/ 400</div>
+                                <div class="stat-label">Comisión Torneos</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">S/ 330</div>
+                                <div class="stat-label">VIP Subscriptions</div>
+                            </div>
+                        </div>
+                        
+                        <div class="cta-section">
+                            <div class="stat-value">S/ 245</div>
+                            <div class="stat-label">Revenue PredicMaster/mes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>📈 Estrategia Go-to-Market (Actualizada Junio 2025)</h2>
+            
+            <div class="content-grid">
+                <div class="feature-card accent-card">
+                    <h3 style="color: white;"><i class="fas fa-code"></i> Fase 0: Desarrollo MVP (Q2 2025 - Actualidad)</h3>
+                    <p style="color: rgba(255,255,255,0.9);"><strong>Estado actual del producto: 50%</strong></p>
+                    <ul style="color: rgba(255,255,255,0.9);">
+                        <li>Arquitectura funcional completada</li>
+                        <li>Módulo de torneos predictivos (en progreso)</li>
+                        <li>Sistema de puntos y rankings (en progreso)</li>
+                        <li>Clubes y sistema VIP gamificado (en progreso)</li>
+                        <li>Interfaz web + PWA en desarrollo</li>
+                        <li>Pruebas internas del motor de puntuación</li>
+                        <li>Comunidad semilla activa (WhatsApp + lista de espera)</li>
+                        <li>Campaña de expectativa en redes (reels, memes, contenido orgánico)</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3><i class="fas fa-flag"></i> Fase 1: Lanzamiento Perú (Q3 2025)</h3>
+                    <div class="stat-value">2K usuarios</div>
+                    <ul>
+                        <li><strong>Septiembre:</strong> Lanzamiento público en Perú</li>
+                        <li>Torneos onboarding de S/ 5 con lógica gamificada</li>
+                        <li>Programa de referidos (S/ 35 por nuevo usuario activo)</li>
+                        <li>Ranking público + sistema VIP visible (estatus social)</li>
+                        <li>Comunidad Telegram por regiones y clubes de fútbol</li>
+                        <li>Sorteos y retos semanales para retención</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3><i class="fas fa-expand"></i> Fase 2: Escalamiento Nacional (Q4 2025 - Q2 2026)</h3>
+                    <div class="stat-value">6K usuarios</div>
+                    <ul>
+                        <li>Aumento frecuencia torneos y volumen por club</li>
+                        <li>Activación "ligas por ciudad" (Lima, Arequipa, Norte)</li>
+                        <li>Influencers deportivos locales + contenido viral</li>
+                        <li>Ligas privadas y torneos temáticos (Eliminatorias, Copa América)</li>
+                        <li>Sistema de niveles, logros y logros públicos</li>
+                        <li>Optimización sistema puntos y recompensas</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3><i class="fas fa-crown"></i> Fase 3: Dominio Mercado Peruano (Q3-Q4 2026)</h3>
+                    <div class="stat-value">10K usuarios / 4K activos</div>
+                    <ul>
+                        <li>Consolidación clubes regionales y comunidad nacional</li>
+                        <li>Sistema logros, tienda virtual y Big Master activo</li>
+                        <li>Eventos especiales (ligas privadas, clasificaciones VIP)</li>
+                        <li>Lanzamiento membresía VIP con beneficios exclusivos</li>
+                        <li>Retención optimizada con gamificación avanzada</li>
+                        <li>Torneos elite para usuarios premium</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cta-section" style="margin: 40px 0;">
+                <h3>🎯 Enfoque: Dominio Total Perú Primero</h3>
+                <p style="font-size: 1.2rem; margin-bottom: 20px;">
+                    <strong>Consolidación completa del mercado peruano</strong> antes de expansión regional
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">4K</div>
+                        <div class="stat-label">MAU Target 2026</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">35%</div>
+                        <div class="stat-label">Retención M1</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">S/ 40</div>
+                        <div class="stat-label">ARPU Mensual</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">15%</div>
+                        <div class="stat-label">VIP Conversion</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two-column" style="margin-top: 40px;">
+                <div class="feature-card">
+                    <h3>🎮 Estrategia Gamificación</h3>
+                    <ul>
+                        <li><strong>Ligas por ciudad:</strong> Competencia local intensa</li>
+                        <li><strong>Ranking público VIP:</strong> Estatus social visible</li>
+                        <li><strong>Sistema logros:</strong> Badges y reconocimientos</li>
+                        <li><strong>Eventos temáticos:</strong> Eliminatorias, Copa América</li>
+                        <li><strong>Clubs regionales:</strong> Identidad futbolística</li>
+                        <li><strong>Torneos elite:</strong> Solo usuarios premium</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3>📊 KPIs por Fase</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">Fase 1</div>
+                            <div class="stat-label">2K usuarios registrados</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">Fase 2</div>
+                            <div class="stat-label">6K usuarios acumulados</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">Fase 3</div>
+                            <div class="stat-label">10K/4K activos mensuales</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">2027</div>
+                            <div class="stat-label">Evaluación expansión regional</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>📊 Proyecciones Financieras Perú (Desde Junio 2025)</h2>
+            <div class="cta-section">
+                <h3>🎯 Métricas Realistas Alineadas con Go-to-Market</h3>
+                <p style="font-size: 1.2rem;">Roadmap financiero basado en plan de adquisición real y funnel de conversión</p>
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <div class="feature-card accent-card">
+                        <h3 style="color: white;">Unit Economics Perú</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                                <div class="stat-value" style="color: white;">S/ 50</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">CAC (con network leverage)</div>
+                            </div>
+                            <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                                <div class="stat-value" style="color: white;">S/ 240</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">LTV 6m conservador</div>
+                            </div>
+                            <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                                <div class="stat-value" style="color: white;">4.8x</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">LTV/CAC</div>
+                            </div>
+                            <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                                <div class="stat-value" style="color: white;">S/ 40</div>
+                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">ARPU mensual</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>📈 Roadmap Financiero Realista</h3>
+                        <ul>
+                            <li><strong>Q3 2025:</strong> 2K registrados, 200 pagadores (10%), S/ 8K MRR</li>
+                            <li><strong>Q4 2025:</strong> 6K registrados, 720 pagadores (12%), S/ 28.8K MRR</li>
+                            <li><strong>Q2 2026:</strong> 8K registrados, 1,120 pagadores (14%), S/ 44.8K MRR</li>
+                            <li><strong>Q4 2026:</strong> 10K registrados, 1,700 pagadores (17%), S/ 68K MRR</li>
+                            <li><strong>Q2 2027:</strong> 12K registrados, 2,400 pagadores (20%), S/ 96K MRR</li>
+                        </ul>
+                        
+                        <div class="cta-section">
+                            <div class="stat-value" style="color: #22c55e;">20 meses</div>
+                            <div class="stat-label">Break-Even Point</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="feature-card">
+                        <h3>✅ Enfoque Perú con Conversion Rate Creciente</h3>
+                        <ul>
+                            <li><strong>Market penetración:</strong> 0.5% del mercado gaming Perú</li>
+                            <li><strong>CAC optimizado:</strong> S/ 50 con network leverage</li>
+                            <li><strong>Retención sólida:</strong> 35% M1 con gamificación local</li>
+                            <li><strong>Conversion growth:</strong> 10% → 20% en 18 meses</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>⚡ Evolución Conversion Rate</h3>
+                        <ul>
+                            <li><strong>Q3 2025:</strong> 10% usuarios registrados pagan</li>
+                            <li><strong>Q4 2025:</strong> 12% (mejora engagement)</li>
+                            <li><strong>Q2 2026:</strong> 14% (VIP adoption)</li>
+                            <li><strong>Q4 2026:</strong> 17% (producto maduro)</li>
+                            <li><strong>Q2 2027:</strong> 20% (gamificación completa)</li>
+                        </ul>
+                        
+                        <div class="cta-section">
+                            <div class="stat-value" style="color: #38bdf8;">S/ 96K</div>
+                            <div class="stat-label">MRR Target Q2 2027</div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>🎯 Métricas Clave 2026</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">4K</div>
+                                <div class="stat-label">MAU Target</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">35%</div>
+                                <div class="stat-label">Retención M1</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">17%</div>
+                                <div class="stat-label">Conversion Rate</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">S/ 68K</div>
+                                <div class="stat-label">MRR Fin 2026</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cta-section">
+                        <h4>🏆 Estrategia Conservadora</h4>
+                        <p style="color: #22c55e;"><strong>✅ Nuestro enfoque:</strong> Dominio Perú + Unit economics sólidos</p>
+                        <p style="color: #ef4444;"><strong>❌ Competencia:</strong> Expansión prematura sin validación</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section" style="margin-top: 40px;">
+                <h3>📊 Proyección 18 Meses (Junio 2025 - Diciembre 2026)</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">Jun 2025</div>
+                        <div class="stat-label">MVP 50% - Inicio</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">Sep 2025</div>
+                        <div class="stat-label">Launch Perú - 2K usuarios</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">Jun 2026</div>
+                        <div class="stat-label">8K usuarios - S/ 44.8K MRR</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">Dic 2026</div>
+                        <div class="stat-label">10K usuarios - S/ 68K MRR</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide hero-slide">
+            <h1>⚡ PredicMaster</h1>
+            <h2>El Futuro del Gaming Deportivo en LatAm</h2>
+            
+            <div class="content-grid" style="margin: 50px 0;">
+                <div class="feature-card accent-card">
+                    <div class="stat-value" style="color: white;">$8B+</div>
+                    <div class="stat-label" style="color: rgba(255,255,255,0.8);">Mercado Total</div>
+                </div>
+                <div class="feature-card">
+                    <div class="stat-value">MVP</div>
+                    <div class="stat-label">Desarrollado</div>
+                </div>
+                <div class="feature-card">
+                    <div class="stat-value">5.5x</div>
+                    <div class="stat-label">LTV/CAC</div>
+                </div>
+                <div class="feature-card">
+                    <div class="stat-value">85x</div>
+                    <div class="stat-label">ROI Potential</div>
+                </div>
+            </div>
+
+            <p class="tagline">La Primera Plataforma <span class="highlight">P2P Skill-Based</span> de LatAm</p>
+            
+            <div class="cta-section" style="margin-top: 50px; max-width: 900px;">
+                <h3 style="margin-bottom: 30px;">🎯 Ready to Scale</h3>
+                
+                <div class="two-column" style="margin: 40px 0;">
+                    <div>
+                        <h4 style="color: #22c55e;">✅ Ejecutado</h4>
+                        <ul>
+                            <li>MVP técnicamente completo</li>
+                            <li>Unit economics validados</li>
+                            <li>Network establecida</li>
+                            <li>Team con track record</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #38bdf8;">🚀 Next 18 meses</h4>
+                        <ul>
+                            <li>15K usuarios multi-región</li>
+                            <li>$60K MRR recurrente</li>
+                            <li>Break-even achieved</li>
+                            <li>Serie A readiness</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="stats-grid" style="margin-top: 40px;">
+                    <div class="stat-item">
+                        <div class="stat-value">$350K</div>
+                        <div class="stat-label">Serie Seed Ask</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">18m</div>
+                        <div class="stat-label">Runway to Break-Even</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">First</div>
+                        <div class="stat-label">Mover LatAm</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">$30M+</div>
+                        <div class="stat-label">Series A Valuation</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px; padding: 30px; background: rgba(56, 189, 248, 0.1); border-radius: 16px; border: 1px solid #38bdf8;">
+                    <h4 style="color: #38bdf8; margin-bottom: 20px;">📧 Contacto</h4>
+                    <p style="font-size: 1.1rem; color: #e2e8f0;">
+                        <strong>Alexander García:</strong> alexander@predicmaster.com<br>
+                        <strong>Phone:</strong> +51 999 123 456<br>
+                        <strong>LinkedIn:</strong> /in/alexander-garcia-predicmaster
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">
+            <i class="fas fa-chevron-left"></i> Anterior
+        </button>
+        <button class="nav-btn" onclick="nextSlide()">
+            Siguiente <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function updateProgress() {
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            if (n >= totalSlides) currentSlide = 0;
+            if (n < 0) currentSlide = totalSlides - 1;
+            
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            updateProgress();
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                currentSlide = 0;
+                showSlide(currentSlide);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                currentSlide = totalSlides - 1;
+                showSlide(currentSlide);
+            }
+        });
+
+        // Touch navigation for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide(); // Swipe left
+            }
+            if (touchEndX > touchStartX + 50) {
+                previousSlide(); // Swipe right
+            }
+        }
+
+        // Initialize
+        showSlide(currentSlide);
+        updateProgress();
+
+        // Auto-save slide position
+        window.addEventListener('beforeunload', function() {
+            localStorage.setItem('predicmaster-slide', currentSlide);
+        });
+
+        // Restore slide position
+        window.addEventListener('load', function() {
+            const savedSlide = localStorage.getItem('predicmaster-slide');
+            if (savedSlide !== null) {
+                currentSlide = parseInt(savedSlide);
+                showSlide(currentSlide);
+            }
+        });
+    </script>
+</body>
+</html>
