@@ -156,7 +156,6 @@
             border-color: rgba(56, 189, 248, 0.4);
         }
 
-        /* Asegurar que todos los cards del hero se vean iguales */
         .hero-slide .feature-card {
             background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
             border: 1px solid rgba(56, 189, 248, 0.2);
@@ -580,6 +579,15 @@
             font-weight: 800;
             font-size: 1.2em;
         }
+        
+        .slide-image {
+            max-width: 100%; 
+            height: auto; 
+            border-radius: 16px; 
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4); 
+            margin-top: 20px; 
+        }
 
         @media (max-width: 768px) {
             .slide {
@@ -766,33 +774,6 @@
                     <p>UX optimizada para la región</p>
                 </div>
             </div>
-
-            <div class="cta-section" style="margin-top: 40px;">
-                <h3 style="margin-bottom: 25px;">🌎 Visión de Expansión Global</h3>
-                <p style="font-size: 1.2rem; margin-bottom: 20px;">
-                    <strong>Posicionar PredicMaster como el juego de habilidad mundial</strong> con torneos internacionales, gamificando las predicciones deportivas y creando oportunidades para que talentos de las predicciones puedan vivir de su expertise analítico.
-                </p>
-                <div class="two-column" style="text-align: left;">
-                    <div>
-                        <h4 style="color: #38bdf8;">🏆 Ecosystem de Talentos</h4>
-                        <ul>
-                            <li>Torneos internacionales con premios significativos</li>
-                            <li>Rankings globales de predictores</li>
-                            <li>Profesionalización del análisis deportivo</li>
-                            <li>Oportunidades de patrocinios y endorsements</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 style="color: #38bdf8;">🎮 Gamificación Avanzada</h4>
-                        <ul>
-                            <li>Sistema de niveles y achievements mundiales</li>
-                            <li>Ligas regionales e internacionales</li>
-                            <li>Eventos especiales (Champions, Mundial)</li>
-                            <li>Reconocimiento global de expertise</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="slide">
@@ -829,36 +810,14 @@
                     </ul>
                 </div>
             </div>
-
-            <div class="two-column" style="margin-top: 40px;">
-                <div class="feature-card">
-                    <h3 style="color: #22c55e;">✅ Nuestras Ventajas</h3>
-                    <ul>
-                        <li>Red establecida 5+ años gaming LatAm</li>
-                        <li>CAC 60% reducido por network leverage</li>
-                        <li>PPPoker B2B execution probada</li>
-                        <li>3-6 meses market entry vs 18+ competencia</li>
-                    </ul>
-                </div>
-                <div class="feature-card">
-                    <h3 style="color: #ef4444;">❌ Competencia NO Puede Copiar</h3>
-                    <ul>
-                        <li>Track record ejecutando en LatAm</li>
-                        <li>Relationships warm desde día 1</li>
-                        <li>Trust y credibilidad pre-establecida</li>
-                        <li>Especialización vs diversification</li>
-                    </ul>
-                </div>
-            </div>
         </div>
-
+        
         <div class="slide">
             <h2>🔨 MVP Técnicamente en Desarrollo</h2>
-            <div class="cta-section">
+             <div class="cta-section">
                 <h3>📱 Desarrollo Activo con Core Features Funcionando</h3>
-                <p style="font-size: 1.2rem;">Mientras la competencia tiene mockups, nosotros tenemos código funcionando y testing interno</p>
+                <p style="font-size: 1.2rem;">Mientras la competencia tiene mockups, nosotros tenemos código y un producto tangible.</p>
             </div>
-
             <div class="two-column">
                 <div>
                     <h3>⚡ Core Features en Progreso</h3>
@@ -872,37 +831,42 @@
                             <div class="stat-label">Interno Activo</div>
                         </div>
                     </div>
-                    
                     <ul>
-                        <li>Dashboard con métricas en tiempo real (parcialmente funcional)</li>
-                        <li>Sistema de torneos (en fase de integración y pruebas)</li>
-                        <li>Balance de usuarios y recarga (implementado en parte)</li>
-                        <li>Freerolls y torneos pagos (estructura básica lista)</li>
-                        <li>Rankings y gestión de jugadores (en construcción)</li>
-                        <li>PWA móvil (optimización en curso)</li>
-                        <li>Panel admin y pagos (estructura básica creada)</li>
-                        <li>Estados automatizados (en desarrollo)</li>
+                        <li>Dashboard con métricas en tiempo real</li>
+                        <li>Sistema de torneos y rankings</li>
+                        <li>Balance de usuarios y recarga</li>
+                        <li>PWA móvil optimizada</li>
+                        <li>Panel de administración de Clubs</li>
                     </ul>
                 </div>
                 <div>
-                    <h3>🚀 Roadmap Actualizado Q2-Q3 2025</h3>
+                    <h3>🚀 Roadmap Q2-Q3 2025</h3>
                     <ul>
-                        <li><strong>Julio-Agosto:</strong> Culminar desarrollo MVP y testeo interno</li>
-                        <li><strong>Septiembre:</strong> Primera beta cerrada con usuarios seleccionados</li>
-                        <li><strong>Octubre:</strong> Iteración sobre feedback y lanzamiento público Perú</li>
-                        <li><strong>Fin 2025:</strong> Sistema VIP + estadísticas avanzadas</li>
-                        <li><strong>2026:</strong> Clubs + gamificación completa</li>
+                        <li><strong>Julio-Agosto:</strong> Culminar MVP y testeo interno</li>
+                        <li><strong>Septiembre:</strong> Beta cerrada con usuarios de la red</li>
+                        <li><strong>Octubre:</strong> Lanzamiento público en Perú</li>
+                        <li><strong>Fin 2025:</strong> Implementación sistema VIP</li>
+                        <li><strong>2026:</strong> Clubs + gamificación avanzada</li>
                     </ul>
+                </div>
+            </div>
+        </div>
 
-                    <div class="feature-card">
-                        <h4 style="margin-bottom: 15px;">🎯 Ventaja Técnica Real</h4>
-                        <ul>
-                            <li>Desarrollo propio, sin plantillas ni mockups</li>
-                            <li>Core features funcionando parcialmente</li>
-                            <li>Arquitectura escalable desde el inicio</li>
-                            <li>Validación continua con potenciales usuarios</li>
-                        </ul>
-                    </div>
+        <div class="slide">
+            <h2>📱 Vistazo a la Plataforma</h2>
+            <p class="subtitle" style="font-size: 1.2rem; max-width: 800px; text-align:center;">Un vistazo exclusivo al estado actual de nuestra PWA, mostrando la experiencia de usuario limpia y funcional.</p>
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h3 style="text-align: center;">Lobby de Torneos</h3>
+                    <img src="image/lobytorneos.png" alt="Lobby principal con la lista de torneos activos" class="slide-image">
+                </div>
+                <div class="feature-card">
+                     <h3 style="text-align: center;">Detalle de Torneo</h3>
+                    <img src="image/testtorneo.png" alt="Detalle de un torneo mostrando el pozo de premios y participantes" class="slide-image">
+                </div>
+                <div class="feature-card">
+                     <h3 style="text-align: center;">Torneo Gratuito</h3>
+                    <img src="image/freerol.png" alt="Pantalla de un torneo gratuito especial o freeroll" class="slide-image">
                 </div>
             </div>
         </div>
@@ -924,62 +888,24 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="feature-card">
                     <h3><i class="fas fa-gem"></i> VIP B2C (20%)</h3>
                     <div class="stat-value">S/ 33/mes</div>
-                    <p>Suscripción con valor real</p>
-                    <ul>
-                        <li>Distintivos sociales únicos</li>
-                        <li>Acceso a picks exclusivos</li>
-                        <li>Análisis avanzado y estadísticas</li>
-                        <li>Acceso a torneos exclusivos</li>
-                        <li>Bonificaciones mensuales</li>
-                        <li>Early access nuevas features</li>
-                    </ul>
+                    <p>Suscripción con valor real y beneficios exclusivos para nuestros usuarios más leales.</p>
                 </div>
-
                 <div class="feature-card">
                     <h3><i class="fas fa-users"></i> Clubs B2B (10%)</h3>
-                    <p><strong>Revenue Share 80/20 y 50/50</strong></p>
-                    <ul>
-                        <li>Managers incentivados traer usuarios</li>
-                        <li>Escalabilidad unlimited</li>
-                        <li>Content expertise sin investment</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="cta-section">
-                <h3>📊 Unit Economics Validados</h3>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-value">S/ 40</div>
-                        <div class="stat-label">ARPU Mensual</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">S/ 50</div>
-                        <div class="stat-label">CAC Blended</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">4.8x</div>
-                        <div class="stat-label">LTV/CAC Ratio</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">75%</div>
-                        <div class="stat-label">Margen Bruto</div>
-                    </div>
+                    <p><strong>Revenue Share 80/20 y 50/50.</strong> Nuestro motor de crecimiento escalable y orgánico.</p>
                 </div>
             </div>
         </div>
 
         <div class="slide">
-            <h2>🏢 Sistema Clubs - Revenue Share B2B</h2>
+            <h2>🏢 Sistema Clubs - Crecimiento Exponencial</h2>
             <div class="two-column">
                 <div class="feature-card accent-card">
                     <h3 style="color: white;">Estructura Revenue Share</h3>
-                    
-                    <h4 style="color: white;">Comisiones Torneos</h4>
+                    <h4 style="color: white; margin-top: 20px;">Comisiones de Torneos</h4>
                     <div class="revenue-split">
                         <div class="split-item">
                             <div class="split-percentage" style="color: white;">80%</div>
@@ -991,7 +917,6 @@
                             <div class="stat-label" style="color: rgba(255,255,255,0.8);">PredicMaster</div>
                         </div>
                     </div>
-
                     <h4 style="color: white;">Suscripciones VIP</h4>
                     <div class="revenue-split">
                         <div class="split-item">
@@ -1005,284 +930,100 @@
                         </div>
                     </div>
                 </div>
-
                 <div>
                     <div class="feature-card">
                         <h3>💡 Beneficios del Modelo B2B</h3>
                         <ul>
-                            <li><strong>Expansión masiva:</strong> Managers incentivados</li>
-                            <li><strong>CAC compartido:</strong> Costos reducidos 60%</li>
-                            <li><strong>Content expertise:</strong> Sin investment directo</li>
-                            <li><strong>Escalabilidad:</strong> Unlimited clubs</li>
+                            <li><strong>Expansión Masiva:</strong> Managers como socios estratégicos.</li>
+                            <li><strong>CAC Compartido:</strong> Reducción de costos de adquisición en un 60%.</li>
+                            <li><strong>Expertise Delegado:</strong> No invertimos en crear contenido, lo potencian los clubs.</li>
+                            <li><strong>Escalabilidad Ilimitada:</strong> Crecimiento orgánico y sostenido.</li>
                         </ul>
-                    </div>
-
-                    <div class="feature-card">
-                        <h3>📈 Ejemplo: Club 100 Miembros</h3>
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <div class="stat-value">S/ 400</div>
-                                <div class="stat-label">Comisión Torneos</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">S/ 330</div>
-                                <div class="stat-label">VIP Subscriptions</div>
-                            </div>
-                        </div>
-                        
-                        <div class="cta-section">
-                            <div class="stat-value">S/ 245</div>
-                            <div class="stat-label">Revenue PredicMaster/mes</div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="slide">
-            <h2>📈 Estrategia Go-to-Market (Actualizada Junio 2025)</h2>
-            
-            <div class="content-grid">
+            <h2>📈 Estrategia Go-to-Market</h2>
+             <div class="content-grid">
                 <div class="feature-card accent-card">
-                    <h3 style="color: white;"><i class="fas fa-code"></i> Fase 0: Desarrollo MVP (Q2 2025 - Actualidad)</h3>
-                    <p style="color: rgba(255,255,255,0.9);"><strong>Estado actual del producto: 50%</strong></p>
-                    <ul style="color: rgba(255,255,255,0.9);">
-                        <li>Arquitectura funcional completada</li>
-                        <li>Módulo de torneos predictivos (en progreso)</li>
-                        <li>Sistema de puntos y rankings (en progreso)</li>
-                        <li>Clubes y sistema VIP gamificado (en progreso)</li>
-                        <li>Interfaz web + PWA en desarrollo</li>
-                        <li>Pruebas internas del motor de puntuación</li>
-                        <li>Comunidad semilla activa (WhatsApp + lista de espera)</li>
-                        <li>Campaña de expectativa en redes (reels, memes, contenido orgánico)</li>
-                    </ul>
-                </div>
-
-                <div class="feature-card">
-                    <h3><i class="fas fa-flag"></i> Fase 1: Lanzamiento Perú (Q3 2025)</h3>
-                    <div class="stat-value">2K usuarios</div>
+                    <h3 style="color: white;"><i class="fas fa-flag"></i> Fase 1: Lanzamiento Perú (Q3 2025)</h3>
+                     <div class="stat-value">2K usuarios</div>
                     <ul>
-                        <li><strong>Septiembre:</strong> Lanzamiento público en Perú</li>
-                        <li>Torneos onboarding de S/ 5 con lógica gamificada</li>
-                        <li>Programa de referidos (S/ 35 por nuevo usuario activo)</li>
-                        <li>Ranking público + sistema VIP visible (estatus social)</li>
-                        <li>Comunidad Telegram por regiones y clubes de fútbol</li>
-                        <li>Sorteos y retos semanales para retención</li>
+                        <li>Lanzamiento público con torneos de onboarding.</li>
+                        <li>Activación de la red de clubs existente.</li>
+                        <li>Campaña de referidos y freerolls especiales.</li>
                     </ul>
                 </div>
-
                 <div class="feature-card">
                     <h3><i class="fas fa-expand"></i> Fase 2: Escalamiento Nacional (Q4 2025 - Q2 2026)</h3>
                     <div class="stat-value">6K usuarios</div>
                     <ul>
-                        <li>Aumento frecuencia torneos y volumen por club</li>
-                        <li>Activación "ligas por ciudad" (Lima, Arequipa, Norte)</li>
-                        <li>Influencers deportivos locales + contenido viral</li>
-                        <li>Ligas privadas y torneos temáticos (Eliminatorias, Copa América)</li>
-                        <li>Sistema de niveles, logros y logros públicos</li>
-                        <li>Optimización sistema puntos y recompensas</li>
+                        <li>Activación de "ligas por ciudad" y torneos regionales.</li>
+                        <li>Contenido viral y colaboración con influencers locales.</li>
+                        <li>Lanzamiento oficial de la membresía VIP.</li>
                     </ul>
                 </div>
-
                 <div class="feature-card">
-                    <h3><i class="fas fa-crown"></i> Fase 3: Dominio Mercado Peruano (Q3-Q4 2026)</h3>
-                    <div class="stat-value">10K usuarios / 4K activos</div>
+                    <h3><i class="fas fa-crown"></i> Fase 3: Dominio Perú y Expansión (2026-2027)</h3>
+                    <div class="stat-value">12K+ usuarios</div>
                     <ul>
-                        <li>Consolidación clubes regionales y comunidad nacional</li>
-                        <li>Sistema logros, tienda virtual y Big Master activo</li>
-                        <li>Eventos especiales (ligas privadas, clasificaciones VIP)</li>
-                        <li>Lanzamiento membresía VIP con beneficios exclusivos</li>
-                        <li>Retención optimizada con gamificación avanzada</li>
-                        <li>Torneos elite para usuarios premium</li>
+                        <li>Consolidación como líder del mercado P2P en Perú.</li>
+                        <li>Eventos especiales para ligas importantes (Copa América, etc.).</li>
+                        <li>Inicio de evaluación y entrada a mercados clave (Colombia, México).</li>
                     </ul>
-                </div>
-            </div>
-
-            <div class="cta-section" style="margin: 40px 0;">
-                <h3>🎯 Enfoque: Dominio Total Perú Primero</h3>
-                <p style="font-size: 1.2rem; margin-bottom: 20px;">
-                    <strong>Consolidación completa del mercado peruano</strong> antes de expansión regional
-                </p>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-value">4K</div>
-                        <div class="stat-label">MAU Target 2026</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">35%</div>
-                        <div class="stat-label">Retención M1</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">S/ 40</div>
-                        <div class="stat-label">ARPU Mensual</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">15%</div>
-                        <div class="stat-label">VIP Conversion</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="two-column" style="margin-top: 40px;">
-                <div class="feature-card">
-                    <h3>🎮 Estrategia Gamificación</h3>
-                    <ul>
-                        <li><strong>Ligas por ciudad:</strong> Competencia local intensa</li>
-                        <li><strong>Ranking público VIP:</strong> Estatus social visible</li>
-                        <li><strong>Sistema logros:</strong> Badges y reconocimientos</li>
-                        <li><strong>Eventos temáticos:</strong> Eliminatorias, Copa América</li>
-                        <li><strong>Clubs regionales:</strong> Identidad futbolística</li>
-                        <li><strong>Torneos elite:</strong> Solo usuarios premium</li>
-                    </ul>
-                </div>
-
-                <div class="feature-card">
-                    <h3>📊 KPIs por Fase</h3>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-value">Fase 1</div>
-                            <div class="stat-label">2K usuarios registrados</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">Fase 2</div>
-                            <div class="stat-label">6K usuarios acumulados</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">Fase 3</div>
-                            <div class="stat-label">10K/4K activos mensuales</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">2027</div>
-                            <div class="stat-label">Evaluación expansión regional</div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
 
         <div class="slide">
-            <h2>📊 Proyecciones Financieras Perú (Desde Junio 2025)</h2>
+            <h2>📊 Proyecciones y Unit Economics</h2>
             <div class="cta-section">
-                <h3>🎯 Métricas Realistas Alineadas con Go-to-Market</h3>
-                <p style="font-size: 1.2rem;">Roadmap financiero basado en plan de adquisición real y funnel de conversión</p>
+                <h3>🎯 Métricas Clave para el Éxito</h3>
+                <p style="font-size: 1.2rem;">Nuestras proyecciones se basan en un crecimiento enfocado en Perú, validando el modelo antes de una expansión agresiva.</p>
             </div>
-
             <div class="two-column">
-                <div>
-                    <div class="feature-card accent-card">
-                        <h3 style="color: white;">Unit Economics Perú</h3>
-                        <div class="stats-grid">
-                            <div class="stat-item" style="background: rgba(255,255,255,0.2);">
-                                <div class="stat-value" style="color: white;">S/ 50</div>
-                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">CAC (con network leverage)</div>
-                            </div>
-                            <div class="stat-item" style="background: rgba(255,255,255,0.2);">
-                                <div class="stat-value" style="color: white;">S/ 240</div>
-                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">LTV 6m conservador</div>
-                            </div>
-                            <div class="stat-item" style="background: rgba(255,255,255,0.2);">
-                                <div class="stat-value" style="color: white;">4.8x</div>
-                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">LTV/CAC</div>
-                            </div>
-                            <div class="stat-item" style="background: rgba(255,255,255,0.2);">
-                                <div class="stat-value" style="color: white;">S/ 40</div>
-                                <div class="stat-label" style="color: rgba(255,255,255,0.8);">ARPU mensual</div>
-                            </div>
+                <div class="feature-card accent-card">
+                    <h3 style="color: white;">Unit Economics Validados</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                            <div class="stat-value" style="color: white;">S/ 50</div>
+                            <div class="stat-label" style="color: rgba(255,255,255,0.8);">CAC</div>
                         </div>
-                    </div>
-
-                    <div class="feature-card">
-                        <h3>📈 Roadmap Financiero Realista</h3>
-                        <ul>
-                            <li><strong>Q3 2025:</strong> 2K registrados, 200 pagadores (10%), S/ 8K MRR</li>
-                            <li><strong>Q4 2025:</strong> 6K registrados, 720 pagadores (12%), S/ 28.8K MRR</li>
-                            <li><strong>Q2 2026:</strong> 8K registrados, 1,120 pagadores (14%), S/ 44.8K MRR</li>
-                            <li><strong>Q4 2026:</strong> 10K registrados, 1,700 pagadores (17%), S/ 68K MRR</li>
-                            <li><strong>Q2 2027:</strong> 12K registrados, 2,400 pagadores (20%), S/ 96K MRR</li>
-                        </ul>
-                        
-                        <div class="cta-section">
-                            <div class="stat-value" style="color: #22c55e;">20 meses</div>
-                            <div class="stat-label">Break-Even Point</div>
+                        <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                            <div class="stat-value" style="color: white;">S/ 275</div>
+                            <div class="stat-label" style="color: rgba(255,255,255,0.8);">LTV (6 meses)</div>
+                        </div>
+                        <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                            <div class="stat-value" style="color: white;">5.5x</div>
+                            <div class="stat-label" style="color: rgba(255,255,255,0.8);">LTV/CAC</div>
+                        </div>
+                        <div class="stat-item" style="background: rgba(255,255,255,0.2);">
+                            <div class="stat-value" style="color: white;">75%</div>
+                            <div class="stat-label" style="color: rgba(255,255,255,0.8);">Margen Bruto</div>
                         </div>
                     </div>
                 </div>
-
-                <div>
-                    <div class="feature-card">
-                        <h3>✅ Enfoque Perú con Conversion Rate Creciente</h3>
-                        <ul>
-                            <li><strong>Market penetración:</strong> 0.5% del mercado gaming Perú</li>
-                            <li><strong>CAC optimizado:</strong> S/ 50 con network leverage</li>
-                            <li><strong>Retención sólida:</strong> 35% M1 con gamificación local</li>
-                            <li><strong>Conversion growth:</strong> 10% → 20% en 18 meses</li>
-                        </ul>
-                    </div>
-
-                    <div class="feature-card">
-                        <h3>⚡ Evolución Conversion Rate</h3>
-                        <ul>
-                            <li><strong>Q3 2025:</strong> 10% usuarios registrados pagan</li>
-                            <li><strong>Q4 2025:</strong> 12% (mejora engagement)</li>
-                            <li><strong>Q2 2026:</strong> 14% (VIP adoption)</li>
-                            <li><strong>Q4 2026:</strong> 17% (producto maduro)</li>
-                            <li><strong>Q2 2027:</strong> 20% (gamificación completa)</li>
-                        </ul>
-                        
-                        <div class="cta-section">
-                            <div class="stat-value" style="color: #38bdf8;">S/ 96K</div>
-                            <div class="stat-label">MRR Target Q2 2027</div>
+                 <div class="feature-card">
+                    <h3>📈 Metas a 18 Meses (Fin de 2026)</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">10K</div>
+                            <div class="stat-label">Usuarios Registrados</div>
                         </div>
-                    </div>
-
-                    <div class="feature-card">
-                        <h3>🎯 Métricas Clave 2026</h3>
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <div class="stat-value">4K</div>
-                                <div class="stat-label">MAU Target</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">35%</div>
-                                <div class="stat-label">Retención M1</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">17%</div>
-                                <div class="stat-label">Conversion Rate</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">S/ 68K</div>
-                                <div class="stat-label">MRR Fin 2026</div>
-                            </div>
+                        <div class="stat-item">
+                            <div class="stat-value">4K</div>
+                            <div class="stat-label">Usuarios Activos (MAU)</div>
                         </div>
-                    </div>
-
-                    <div class="cta-section">
-                        <h4>🏆 Estrategia Conservadora</h4>
-                        <p style="color: #22c55e;"><strong>✅ Nuestro enfoque:</strong> Dominio Perú + Unit economics sólidos</p>
-                        <p style="color: #ef4444;"><strong>❌ Competencia:</strong> Expansión prematura sin validación</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cta-section" style="margin-top: 40px;">
-                <h3>📊 Proyección 18 Meses (Junio 2025 - Diciembre 2026)</h3>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-value">Jun 2025</div>
-                        <div class="stat-label">MVP 50% - Inicio</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">Sep 2025</div>
-                        <div class="stat-label">Launch Perú - 2K usuarios</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">Jun 2026</div>
-                        <div class="stat-label">8K usuarios - S/ 44.8K MRR</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">Dic 2026</div>
-                        <div class="stat-label">10K usuarios - S/ 68K MRR</div>
+                         <div class="stat-item">
+                            <div class="stat-value">S/ 68K</div>
+                            <div class="stat-label">MRR (Ingreso Mensual)</div>
+                        </div>
+                         <div class="stat-item">
+                            <div class="stat-value" style="color: #22c55e;">Positivos</div>
+                            <div class="stat-label">Flujo de Caja</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1290,78 +1031,22 @@
 
         <div class="slide hero-slide">
             <h1>⚡ PredicMaster</h1>
-            <h2>El Futuro del Gaming Deportivo en LatAm</h2>
-            
-            <div class="content-grid" style="margin: 50px 0;">
-                <div class="feature-card accent-card">
-                    <div class="stat-value" style="color: white;">$8B+</div>
-                    <div class="stat-label" style="color: rgba(255,255,255,0.8);">Mercado Total</div>
-                </div>
-                <div class="feature-card">
-                    <div class="stat-value">MVP</div>
-                    <div class="stat-label">Desarrollado</div>
-                </div>
-                <div class="feature-card">
-                    <div class="stat-value">5.5x</div>
-                    <div class="stat-label">LTV/CAC</div>
-                </div>
-                <div class="feature-card">
-                    <div class="stat-value">85x</div>
-                    <div class="stat-label">ROI Potential</div>
-                </div>
-            </div>
-
-            <p class="tagline">La Primera Plataforma <span class="highlight">P2P Skill-Based</span> de LatAm</p>
+            <h2>El Futuro del Gaming Deportivo</h2>
+            <p class="tagline">Donde la <span class="highlight">Habilidad</span> Vence a la <span class="highlight">Suerte</span>.</p>
             
             <div class="cta-section" style="margin-top: 50px; max-width: 900px;">
-                <h3 style="margin-bottom: 30px;">🎯 Ready to Scale</h3>
-                
-                <div class="two-column" style="margin: 40px 0;">
-                    <div>
-                        <h4 style="color: #22c55e;">✅ Ejecutado</h4>
-                        <ul>
-                            <li>MVP técnicamente completo</li>
-                            <li>Unit economics validados</li>
-                            <li>Network establecida</li>
-                            <li>Team con track record</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 style="color: #38bdf8;">🚀 Next 18 meses</h4>
-                        <ul>
-                            <li>15K usuarios multi-región</li>
-                            <li>$60K MRR recurrente</li>
-                            <li>Break-even achieved</li>
-                            <li>Serie A readiness</li>
-                        </ul>
-                    </div>
-                </div>
+                 <h3 style="margin-bottom: 30px;">Una Inversión en el Equipo Correcto y el Momento Preciso</h3>
+                <p style="font-size: 1.3rem; line-height: 1.7; color: #e2e8f0; text-align: center; max-width: 800px; margin: 20px auto;">
+                    PredicMaster no es solo una idea; es la evolución inevitable del mercado de apuestas deportivas. Atacamos un mercado de <strong>$8B</strong> con un modelo de negocio superior, una ventaja competitiva real a través de nuestra red y un producto que ya es tangible.
+                    <br><br>
+                    Somos el equipo con la experiencia para ejecutar esta visión y posicionar a PredicMaster como el líder indiscutible en el gaming deportivo basado en habilidad en LatAm.
+                </p>
 
-                <div class="stats-grid" style="margin-top: 40px;">
-                    <div class="stat-item">
-                        <div class="stat-value">$350K</div>
-                        <div class="stat-label">Serie Seed Ask</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">18m</div>
-                        <div class="stat-label">Runway to Break-Even</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">First</div>
-                        <div class="stat-label">Mover LatAm</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">$30M+</div>
-                        <div class="stat-label">Series A Valuation</div>
-                    </div>
-                </div>
-                
                 <div style="margin-top: 40px; padding: 30px; background: rgba(56, 189, 248, 0.1); border-radius: 16px; border: 1px solid #38bdf8;">
-                    <h4 style="color: #38bdf8; margin-bottom: 20px;">📧 Contacto</h4>
+                    <h4 style="color: #38bdf8; margin-bottom: 20px;">📧 Contáctanos</h4>
                     <p style="font-size: 1.1rem; color: #e2e8f0;">
-                        <strong>Alexander García:</strong> alexander@predicmaster.com<br>
-                        <strong>Phone:</strong> +51 999 123 456<br>
-                        <strong>LinkedIn:</strong> /in/alexander-garcia-predicmaster
+                        <strong>Alexander García:</strong> alexander92U@gmail.com | +51 991 351 213<br>
+                        <strong>Roger Alvarado:</strong> rynorstrike@gmail.com | +51 934 721 231
                     </p>
                 </div>
             </div>
@@ -1410,7 +1095,6 @@
             showSlide(currentSlide);
         }
 
-        // Keyboard navigation
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowRight' || e.key === ' ') {
                 e.preventDefault();
@@ -1429,7 +1113,6 @@
             }
         });
 
-        // Touch navigation for mobile
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -1444,23 +1127,20 @@
 
         function handleSwipe() {
             if (touchEndX < touchStartX - 50) {
-                nextSlide(); // Swipe left
+                nextSlide(); 
             }
             if (touchEndX > touchStartX + 50) {
-                previousSlide(); // Swipe right
+                previousSlide();
             }
         }
 
-        // Initialize
         showSlide(currentSlide);
         updateProgress();
 
-        // Auto-save slide position
         window.addEventListener('beforeunload', function() {
             localStorage.setItem('predicmaster-slide', currentSlide);
         });
 
-        // Restore slide position
         window.addEventListener('load', function() {
             const savedSlide = localStorage.getItem('predicmaster-slide');
             if (savedSlide !== null) {
